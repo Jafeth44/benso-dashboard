@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "equipos-benso": {
+      "hosting": {
+        "benso-dashboard": [
+          "equipos-benso"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "equipos-benso"
+  }
+}

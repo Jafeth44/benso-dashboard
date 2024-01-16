@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "benso-dashboard",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}
