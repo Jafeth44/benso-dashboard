@@ -1,23 +1,33 @@
-export class Local {
-  public id?: string;
+import { Equipo } from '../models/Equipo.model';
+import { Local } from '../models/Local.model';
+
+export class CrearEquipoConLocalDto implements Equipo, Local {
+  public modelo: string;
+  public activo: number;
+  public serie: string;
   public nombreLocal?: string;
   public telefono?: string;
   public direccion?: string;
   public encargado?: string;
   public fechaDeEntrega?: Date;
-  public ubicacion?: string;
-  public foto?: string;
+  public ubicacion?: string | undefined;
+  public foto?: string | undefined;
+
   constructor(
-    id: string | undefined,
+    modelo: string,
+    activo: number,
+    serie: string,
     nombreLocal: string,
     telefono: string,
     direccion: string,
     encargado: string,
     fechaDeEntrega: Date,
-    ubicacion?: string,
-    foto?: string
+    ubicacion?: string | undefined,
+    foto?: string | undefined
   ) {
-    this.id = id;
+    this.modelo = modelo;
+    this.activo = activo;
+    this.serie = serie;
     this.nombreLocal = nombreLocal;
     this.telefono = telefono;
     this.direccion = direccion;

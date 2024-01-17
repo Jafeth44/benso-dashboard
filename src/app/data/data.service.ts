@@ -1,6 +1,7 @@
 import { Injectable, OnInit, inject } from '@angular/core';
-import { DocumentData, Firestore, collection, doc, getDoc, getDocs, query } from '@angular/fire/firestore';
+import { DocumentData, Firestore, addDoc, collection, collectionData, doc, getDoc, getDocs, query, setDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { CrearEquipoConLocalDto } from './dtos/CreateEquipoConLocal.dto';
 
 export interface EquipoNuevo {
   nombre: string;
@@ -10,18 +11,20 @@ export interface EquipoNuevo {
   providedIn: 'root'
 })
 export class DataService {
-
   private firestore: Firestore = inject(Firestore);
-  private equipos: DocumentData[] = [];
+  private equipo$: Observable<any[]>;
 
-  public async getData(): Promise<DocumentData[]> {
-    const dataArray: DocumentData[] = [];
-    const data = await getDocs(collection(this.firestore, "equipos"));
-    data.forEach(docs => dataArray.push(docs.data()));
-    return dataArray;
+  constructor() {
+    const aCollection = collection(this.firestore, "equipos");
+    this.equipo$ = collectionData(aCollection) as Observable<any[]>;
   }
 
-  public get leerEquipos() {
-    return this.equipos;
+  public async crearEquipo(equipo: CrearEquipoConLocalDto) {
+    const newDoc = await setDoc(doc(this.firestore, "equipos", equipo.activo.toString()), equipo);
+    return newDoc;
+  }
+
+  public get todosLosEquipos() {
+    return this.equipo$;
   }
 }

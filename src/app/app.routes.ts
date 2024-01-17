@@ -10,12 +10,8 @@ export const routes: Routes = [
     component: DashboardLayoutComponent,
     children: [
       {
-        path: 'home',
+        path: '',
         loadComponent: () => import('./pages/home-page/home-page.component').then(c => c.HomePageComponent),
-      },
-      {
-        path: 'information',
-        loadComponent: () => import('./pages/information-page/information-page.component').then(c => c.InformationPageComponent),
       },
       {
         path: 'stats',
@@ -26,8 +22,20 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/clients-page/clients-page.component').then(c => c.ClientsPageComponent),
       },
       {
+        path: 'equipos',
+        loadComponent: () => import('./pages/equipos-page/equipos-page.component').then(c => c.EquiposPageComponent),
+      },
+      {
+        path: 'equipos/nuevo',
+        loadComponent: () => import('./pages/nuevo-equipo-page/nuevo-equipo-page.component').then(c => c.NuevoEquipoPageComponent)
+      },
+      {
+        path: 'mantenimiento',
+        loadComponent: () => import('./pages/mantenimiento-page/mantenimiento-page.component').then(c => c.MantenimientoPageComponent),
+      },
+      {
         path: '**',
-        redirectTo: 'home',
+        redirectTo: '',
       },
     ]
   },
