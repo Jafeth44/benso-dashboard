@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
+import { DataService } from '../../data/data.service';
 
 @Component({
   standalone: true,
