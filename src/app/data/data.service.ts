@@ -1,9 +1,8 @@
-import { Injectable, OnInit, inject } from '@angular/core';
-import { DocumentData, Firestore, addDoc, collection, collectionData, doc, getDoc, getDocs, query, setDoc } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { Firestore, collection, collectionData, doc, setDoc } from '@angular/fire/firestore';
+import { Observable, catchError, map, of } from 'rxjs';
 import { CrearEquipoConLocalDto } from './dtos/CreateEquipoConLocal.dto';
 import { Storage, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
-import { uploadBytesResumable } from 'firebase/storage';
 
 export interface EquipoNuevo {
   nombre: string;
@@ -29,6 +28,13 @@ export class DataService {
 
   public get todosLosEquipos() {
     return this.equipo$;
+  }
+
+  public equipoPorNombre(nombre: string) {
+    return this.equipo$.pipe(
+      map(equipo => equipo.includes(nombre) ? equipo : null),
+      catchError(() => of(null))
+    )
   }
   
   public async subirImagen(input: HTMLInputElement) {

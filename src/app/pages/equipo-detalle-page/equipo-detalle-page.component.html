@@ -1,5 +1,5 @@
-<div class= "shadow-2xl dark:bg-base-300 w-full rounded-md overflow-x-scroll">
-  <div class="flex justify-between items-center w-full bg-sky-50 dark:bg-inherit">
+<div class= "shadow-2xl dark:bg-base-300 w-full rounded-md">
+  <div class="flex justify-between items-center w-full rounded-md bg-sky-50 dark:bg-inherit">
     <h1 class="text-xl p-3">Equipo {{route}}</h1>
     <button class="btn btn-primary btn-sm mr-3" routerLink="..">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
@@ -8,6 +8,12 @@
       Regresar
     </button>
   </div>
+  @if(equipo$ | async) {
 
+  } @else {
 
+    <div class="w-full h-full flex justify-center self-center">
+      <div class="loading loading-ring"></div>
+    </div>
+  }
 </div>
