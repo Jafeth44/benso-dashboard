@@ -14,29 +14,26 @@ import { routes } from './app.routes';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, withViewTransitions()),
-    importProvidersFrom(provideFirebaseApp(() => {
-      const initialize = initializeApp(environment.config);
-      return initialize;
-    })),
+    importProvidersFrom(provideFirebaseApp(() => initializeApp(environment.config))),
     importProvidersFrom(provideAppCheck(() => initializeAppCheck(getApp(), {
       provider: new ReCaptchaV3Provider('6LeEY1QpAAAAAGZURIQFpD05BgnJ4tKf15TdbEER'),
     }))),
     importProvidersFrom(provideAuth(() => {
       const auth = getAuth();
-      !environment.production ? connectAuthEmulator(auth, 'http://127.0.0.1:9099') : null;
+      // !environment.production ? connectAuthEmulator(auth, 'http://127.0.0.1:9099') : null;
       return auth;
     })),
     importProvidersFrom(provideAnalytics(() => getAnalytics())),
     ScreenTrackingService,
     UserTrackingService, 
     importProvidersFrom(provideFirestore(() => {
-      const firestore = initializeFirestore(getApp(), {localCache: persistentLocalCache({tabManager: persistentMultipleTabManager()})});
-      !environment.production ? connectFirestoreEmulator(firestore, 'localhost', 8080) : null;
+      const firestore = initializeFirestore(getApp(), {localCache: persistentLocalCache({tabManager: persistentMultipleTabManager()}), experimentalForceLongPolling: true});
+      // !environment.production ? connectFirestoreEmulator(firestore, 'localhost', 8080) : null;
       return firestore;
     })),
     importProvidersFrom(provideStorage(() => {
       const storage = getStorage();
-      !environment.production ? connectStorageEmulator(storage, 'localhost', 9199) : null;
+      // !environment.production ? connectStorageEmulator(storage, 'localhost', 9199) : null;
       return storage;
     }))
   ],
