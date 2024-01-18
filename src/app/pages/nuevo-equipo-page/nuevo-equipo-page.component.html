@@ -9,7 +9,8 @@
     </button>
   </div>
   <!-- space-y-6 -->
-  <form class="grid grid-cols-1 p-3 gap-2 lg:grid-cols-2 w-full" [formGroup]="nuevoEquipoForm" (ngSubmit)="createNewEquipo()">
+  <img src="https://firebasestorage.googleapis.com/v0/b/equipos-benso.appspot.com/o/logos.png?alt=media&token=bbf5d40a-a73c-4f39-bbf9-967f830a720a" alt="">
+  <form class="grid grid-cols-1 p-3 gap-2 lg:grid-cols-2 w-full" [formGroup]="nuevoEquipoForm" (ngSubmit)="createNewEquipo(upload)">
         <div class="form-control">
           <div class="label">
             <span class="label-text">
@@ -97,7 +98,7 @@
               Foto
             </span>
           </div>
-          <input type="file" formControlName="foto" class="file-input file-input-bordered w-full"/>
+          <input type="file" accept="image/*" #upload formControlName="foto" class="file-input file-input-bordered w-full"/>
         </div>
         <div class="flex justify-center p-3 items-center w-full dark:bg-inherit col-span-1 lg:col-span-2">
           <button type="submit" class="btn btn-success btn-sm">

@@ -1,4 +1,5 @@
 import { Injectable, inject } from '@angular/core';
+import { AppCheck } from '@angular/fire/app-check';
 import {
   Auth,
   authState,
@@ -22,6 +23,7 @@ export type Credentials = {
 })
 export class AuthService {
   private auth: Auth = inject(Auth);
+  private appCheck = inject(AppCheck);
   public readonly authState$ = authState(this.auth);
 
   public registerWithEmail(credentials: Credentials) {

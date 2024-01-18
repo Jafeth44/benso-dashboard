@@ -15,7 +15,9 @@ export class NuevoEquipoPageComponent {
   private formBuilder = inject(FormBuilder);
   private dataService = inject(DataService);
   private location = inject(Location);
+
   public isFormInvalid: boolean = false;
+
   public nuevoEquipoForm: FormGroup = this.formBuilder.group({
     modelo: ['', Validators.required],
     activo: ['', Validators.required],
@@ -33,7 +35,8 @@ export class NuevoEquipoPageComponent {
     this.isFormInvalid = false;
   }
 
-  public async createNewEquipo() {
+
+  public async createNewEquipo(input: HTMLInputElement) {
     this.nuevoEquipoForm.markAsDirty();
     if (this.nuevoEquipoForm.invalid) {
       this.isFormInvalid = true;
@@ -50,11 +53,11 @@ export class NuevoEquipoPageComponent {
       encargado: this.nuevoEquipoForm.value.encargado,
       fechaDeEntrega: this.nuevoEquipoForm.value.fechaDeEntrega,
       ubicacion: this.nuevoEquipoForm.value.ubicacion,
-      foto: this.nuevoEquipoForm.value.foto
     }
     try {
+      const fotoUpload = await this.dataService.subirImagen(input);
+      nuevoEquipo.foto = fotoUpload || "";
       const saved = await this.dataService.crearEquipo(nuevoEquipo);
-      console.log(saved);
       this.location.back();
     } catch (error) {
       console.log(error);
