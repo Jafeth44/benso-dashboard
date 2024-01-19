@@ -12,6 +12,9 @@ import { GetEquiposLocalDto } from '../../data/dtos/GetEquiposLocal.dto';
   imports: [CommonModule, RouterLink],
   templateUrl: './equipos-page.component.html',
   styles: /*css*/`
+  #table-container {
+    container-type: size;
+  }
   `,
 })
 export class EquiposPageComponent implements OnInit {

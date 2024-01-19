@@ -1,5 +1,5 @@
-<div class= "shadow-2xl dark:bg-base-300 w-full flex flex-col rounded-2xl">
-  <div class="flex justify-between items-center w-full bg-primary-content rounded-t-2xl p-3 ">
+<div id="table-container" class="shadow-2xl dark:bg-base-300 h-full w-full flex flex-col md:rounded-2xl">
+  <div class="flex justify-between items-center w-full bg-primary-content md:rounded-t-2xl p-3 ">
     <h1 class="text-xl p-3 card-title">Equipos <input type="text" class="input input-bordered input-sm" placeholder="Buscar"/></h1>
     <button class="btn btn-primary btn-sm mr-3" routerLink="nuevo">Nuevo 
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
@@ -7,13 +7,13 @@
     </svg>
     </button>
   </div>
-  <div class="overflow-x-auto">
+  <div class="flex-1 overflow-scroll">
     <!-- aqui comienza la tabla -->
     @if(equipo$ | async) {
-      <table class="table table-sm overflow-y-scroll">
+      <table class="table table-sm table-pin-rows">
         <!-- head -->
-        <thead class="bg-primary-content">
-          <tr>
+        <thead>
+          <tr class="bg-primary-content">
             <th>Activo</th>
             <th class="hidden md:table-cell">Fecha entrega</th>
             <th class="hidden md:table-cell">Modelo</th>
@@ -45,7 +45,7 @@
         }
       }
   </div>
-  <div class="flex justify-center items-center w-full bg-primary-content rounded-b-2xl p-3">
+  <div class="flex justify-center items-center w-full bg-primary-content md:rounded-b-2xl p-3">
     <div class="join">
       @for (item of [].constructor(numeroPaginas); track $index) {
         <button (click)="cambioDePagina($index)" class="join-item btn" [ngClass]="numeroPaginaActual == $index + 1 ? 'btn-active bg-primary hover:bg-primary hover:opacity-80' : ''">{{$index + 1}}</button>
