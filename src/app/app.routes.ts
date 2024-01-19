@@ -34,6 +34,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/equipo-detalle-page/equipo-detalle-page.component').then(c => c.EquipoDetallePageComponent)
       },
       {
+        path: 'equipos/:id/editar',
+        loadComponent: () => import('./pages/nuevo-equipo-page/nuevo-equipo-page.component').then(c => c.NuevoEquipoPageComponent)
+      },
+      {
         path: 'mantenimiento',
         loadComponent: () => import('./pages/mantenimiento-page/mantenimiento-page.component').then(c => c.MantenimientoPageComponent),
       },

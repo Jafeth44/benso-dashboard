@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { Firestore, docData } from '@angular/fire/firestore';
-import { Observable, pipe, map, tap } from 'rxjs';
+import { Observable, map, take } from 'rxjs';
 import { doc } from 'firebase/firestore';
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { GetEquiposLocalDto } from '../../data/dtos/GetEquiposLocal.dto';
@@ -36,8 +36,9 @@ export class EquipoDetallePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.equipo$.pipe(
-        map((equipo : GetEquiposLocalDto) => this.equipo = equipo),
-      ).subscribe();
+    this.equipo$.pipe(
+      take(1),
+      map((equipo : GetEquiposLocalDto) => this.equipo = equipo),
+    ).subscribe();
   }
 }
