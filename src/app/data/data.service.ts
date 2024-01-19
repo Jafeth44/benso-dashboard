@@ -37,11 +37,9 @@ export class DataService {
     )
   }
   
-  public async subirImagen(input: HTMLInputElement) {
-    if (!input.files) {
-      console.log('no llego la imagen');
-      return;
-    }
+  public async subirImagen(input: HTMLInputElement): Promise<string | undefined> {
+    if (!input.files?.item(0)) return undefined;
+
     const file = input.files[0];
     const storageRef = ref(this.storage, file.name);
     await uploadBytes(storageRef, file);

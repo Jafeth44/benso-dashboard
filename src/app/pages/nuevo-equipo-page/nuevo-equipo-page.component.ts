@@ -1,21 +1,24 @@
-import { CommonModule, Location } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { DataService } from '../../data/data.service';
 import { CrearEquipoConLocalDto } from '../../data/dtos/CreateEquipoConLocal.dto';
+import { LoaderComponent } from '../../components/loader/loader.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, CommonModule],
+  imports: [ReactiveFormsModule, RouterLink, CommonModule, LoaderComponent],
   templateUrl: './nuevo-equipo-page.component.html',
   styles: ``
 })
 export class NuevoEquipoPageComponent {
   private formBuilder = inject(FormBuilder);
   private dataService = inject(DataService);
-  private location = inject(Location);
-
+  private toastr = inject(ToastrService);
+  private router = inject(Router);
+  public isLoading: boolean = false;
   public isFormInvalid: boolean = false;
 
   public nuevoEquipoForm: FormGroup = this.formBuilder.group({
@@ -35,12 +38,13 @@ export class NuevoEquipoPageComponent {
     this.isFormInvalid = false;
   }
 
-
   public async createNewEquipo(input: HTMLInputElement) {
+    this.isLoading = true;
     this.nuevoEquipoForm.markAsDirty();
     if (this.nuevoEquipoForm.invalid) {
       this.isFormInvalid = true;
-      console.log('problemas de form');
+      this.toastr.warning('Por favor revisa los datos');
+      this.isLoading = false;
       return;
     }
     const nuevoEquipo: CrearEquipoConLocalDto = {
@@ -58,10 +62,14 @@ export class NuevoEquipoPageComponent {
       const fotoUpload = await this.dataService.subirImagen(input);
       nuevoEquipo.foto = fotoUpload || "";
       const saved = await this.dataService.crearEquipo(nuevoEquipo);
-      this.location.back();
+      this.isLoading = false;
+      this.toastr.success('Se ha creado correctamente','Guardado');
+      this.router.navigateByUrl('/dashboard/equipos');
     } catch (error) {
       console.log(error);
+      this.isLoading = false;
       this.isFormInvalid = true;
+      this.toastr.error('Se ha producido un error inesperado');
       return;
     }
   }

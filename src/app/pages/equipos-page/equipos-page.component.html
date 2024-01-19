@@ -1,4 +1,4 @@
-<div class= "shadow-2xl dark:bg-base-300 w-full rounded-md">
+<div class= "shadow-2xl dark:bg-base-300 w-full flex flex-col rounded-md">
   <div class="flex justify-between items-center w-full bg-sky-50 dark:bg-inherit rounded-md">
     <h1 class="text-xl p-3">Equipos</h1>
     <button class="btn btn-primary btn-sm mr-3" routerLink="nuevo">Agregar Nuevo 
@@ -7,10 +7,10 @@
     </svg>
     </button>
   </div>
-  <div class="w-full max-h-full overflow-x-scroll overflow-y-scroll">
+  <div id="table-container">
     <!-- aqui comienza la tabla -->
     @if(equipo$ | async) {
-      <table class="table table-sm">
+      <table class="table table-sm overflow-y-scroll">
         <!-- head -->
         <thead class="bg-sky-50 dark:bg-base-300">
           <tr>
@@ -24,9 +24,9 @@
             <th>Encargado</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="overflow-y-auto">
           @for(item of equipo$ | async; track $index) {
-          <tr class="h-16"[routerLink]="item.activo" [classList]="$odd ? 'bg-base-100 cursor-pointer hover:bg-sky-100 dark:hover:bg-teal-950 rounded-md' : 'bg-base-200 cursor-pointer hover:bg-sky-100 dark:hover:bg-teal-950 rounded-md'" >
+          <tr [routerLink]="item.activo" [classList]="$odd ? 'bg-base-100 cursor-pointer hover:bg-sky-100 dark:hover:bg-teal-950 rounded-md' : 'bg-base-200 cursor-pointer hover:bg-sky-100 dark:hover:bg-teal-950 rounded-md'" >
             <td><div class="badge badge-accent">{{ item.activo }}</div></td>
             <td class="hidden md:table-cell">{{item.fechaDeEntrega| date:'MM/dd/YY'}}</td>
             <td class="hidden md:table-cell">{{ item.modelo }}</td>

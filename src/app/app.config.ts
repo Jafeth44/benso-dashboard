@@ -1,5 +1,6 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter, withViewTransitions } from '@angular/router';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { getApp, initializeApp, provideFirebaseApp,  } from '@angular/fire/app';
 import { connectAuthEmulator, getAuth, provideAuth } from '@angular/fire/auth';
@@ -10,6 +11,7 @@ import { connectStorageEmulator, getStorage, provideStorage } from '@angular/fir
 
 import { environment } from '../environments/environment';
 import { routes } from './app.routes';
+import { provideToastr } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -35,6 +37,8 @@ export const appConfig: ApplicationConfig = {
       const storage = getStorage();
       // !environment.production ? connectStorageEmulator(storage, 'localhost', 9199) : null;
       return storage;
-    }))
+    })),
+    provideAnimations(),
+    provideToastr()
   ],
 };
