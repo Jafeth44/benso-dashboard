@@ -18,23 +18,15 @@ import { GetEquiposDto } from '../../data/dtos/GetEquipos.dto';
     }
   `
 })
-export class EquipoDetallePageComponent implements OnInit {
+export class EquipoDetallePageComponent {
   private activatedRoute = inject(ActivatedRoute);
   private firestore = inject(Firestore);
-  public equipo$: Observable<any>;
+  public equipo$: Observable<GetEquiposDto>;
   public route: string;
-  public equipo!: GetEquiposDto;
 
   constructor() {
     this.route = this.activatedRoute.snapshot.params['id'];
     const aDoc = doc(this.firestore, "equipos", this.route);
-    this.equipo$ = docData(aDoc) as Observable<any>;
-  }
-
-  ngOnInit(): void {
-    this.equipo$.pipe(
-      take(1),
-      map((equipo : GetEquiposDto) => this.equipo = equipo),
-    ).subscribe();
+    this.equipo$ = docData(aDoc) as Observable<GetEquiposDto>;
   }
 }

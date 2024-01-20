@@ -1,6 +1,6 @@
 import { Equipo } from '../models/Equipo.model';
 import { Local } from '../models/Local.model';
-import { Mantenimiento } from '../models/Mantenimiento.model';
+import { Mantenimiento } from '../interfaces/Mantenimiento.interface';
 
 export class GetEquiposDto implements Equipo, Local {
   public modelo: string;
@@ -14,6 +14,7 @@ export class GetEquiposDto implements Equipo, Local {
   public ubicacion?: string | undefined;
   public foto?: string | undefined;
   public mantenimientos?: Mantenimiento[];
+  public proximoMantenimiento?: Date;
   constructor(
     modelo: string,
     activo: string,
@@ -23,9 +24,10 @@ export class GetEquiposDto implements Equipo, Local {
     direccion: string,
     encargado: string,
     fechaDeEntrega: Date,
+    proximoMantenimiento: Date,
     ubicacion?: string | undefined,
     foto?: string | undefined,
-    mantenimientos?: Mantenimiento[]
+    mantenimientos?: Mantenimiento[],
   ) {
     this.modelo = modelo;
     this.activo = activo;
@@ -38,5 +40,6 @@ export class GetEquiposDto implements Equipo, Local {
     this.ubicacion = ubicacion;
     this.foto = foto;
     this.mantenimientos = mantenimientos;
+    this.proximoMantenimiento = proximoMantenimiento;
   }
 }

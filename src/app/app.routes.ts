@@ -42,6 +42,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/mantenimiento-page/mantenimiento-page.component').then(c => c.MantenimientoPageComponent),
       },
       {
+        path: 'mantenimiento/:id/nuevo',
+        loadComponent: () => import('./pages/mantenimiento-formulario-page/mantenimiento-formulario-page.component').then(c => c.MantenimientoFormularioPageComponent),
+      },
+      {
         path: '**',
         redirectTo: '',
       },
