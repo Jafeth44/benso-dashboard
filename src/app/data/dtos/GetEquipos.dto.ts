@@ -1,7 +1,8 @@
 import { Equipo } from '../models/Equipo.model';
 import { Local } from '../models/Local.model';
+import { Mantenimiento } from '../models/Mantenimiento.model';
 
-export class GetEquiposLocalDto implements Equipo, Local {
+export class GetEquiposDto implements Equipo, Local {
   public modelo: string;
   public activo: number;
   public serie: string;
@@ -12,7 +13,7 @@ export class GetEquiposLocalDto implements Equipo, Local {
   public fechaDeEntrega?: Date;
   public ubicacion?: string | undefined;
   public foto?: string | undefined;
-
+  public mantenimientos?: Mantenimiento[];
   constructor(
     modelo: string,
     activo: number,
@@ -23,7 +24,8 @@ export class GetEquiposLocalDto implements Equipo, Local {
     encargado: string,
     fechaDeEntrega: Date,
     ubicacion?: string | undefined,
-    foto?: string | undefined
+    foto?: string | undefined,
+    mantenimientos?: Mantenimiento[]
   ) {
     this.modelo = modelo;
     this.activo = activo;
@@ -35,5 +37,6 @@ export class GetEquiposLocalDto implements Equipo, Local {
     this.fechaDeEntrega = fechaDeEntrega;
     this.ubicacion = ubicacion;
     this.foto = foto;
+    this.mantenimientos = mantenimientos;
   }
 }

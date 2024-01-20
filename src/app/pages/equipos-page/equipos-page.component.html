@@ -1,6 +1,9 @@
-<div id="table-container" class="shadow-2xl dark:bg-base-300 h-full w-full flex flex-col md:rounded-2xl">
+<div id="table-container" class="shadow-2xl dark:bg-base-300 h-full w-full flex flex-col rounded-sm md:rounded-2xl">
   <div class="flex justify-between items-center w-full bg-primary-content md:rounded-t-2xl p-3 ">
-    <h1 class="text-xl p-3 card-title">Equipos <input type="text" class="input input-bordered input-sm" placeholder="Buscar"/></h1>
+    <h1 class="text-xl p-3 card-title">
+      Equipos 
+      <input type="text" class="input input-bordered input-sm" placeholder="Buscar" (input)="busquedaEquipos(searchQuery.value)" #searchQuery/>
+    </h1>
     <button class="btn btn-primary btn-sm mr-3" routerLink="nuevo">Nuevo 
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
       <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -26,7 +29,7 @@
         </thead>
         <tbody class="overflow-y-auto">
           @for(item of paginaActual; track $index) {
-          <tr [routerLink]="item.activo.toString()"  [classList]="$odd ? 'bg-base-100 cursor-pointer hover:badge-primary hover:bg-opacity-90 hover:transition-all' : 'bg-base-200 cursor-pointer hover:badge-primary hover:bg-opacity-90 hover:transition-all'" >
+          <tr [routerLink]="item.activo.toString()"  [classList]="$odd ? 'bg-base-100 cursor-pointer hover:bg-base-content hover:bg-opacity-30 hover:transition-all' : 'bg-base-200 cursor-pointer hover:bg-base-content hover:bg-opacity-30 hover:transition-all'" >
             <td><div class="badge badge-accent">{{ item.activo }}</div></td>
             <td class="hidden md:table-cell">{{item.fechaDeEntrega| date:'MM/dd/YY'}}</td>
             <td class="hidden md:table-cell">{{ item.modelo }}</td>
@@ -48,7 +51,7 @@
   <div class="flex justify-center items-center w-full bg-primary-content md:rounded-b-2xl p-3">
     <div class="join">
       @for (item of [].constructor(numeroPaginas); track $index) {
-        <button (click)="cambioDePagina($index)" class="join-item btn" [ngClass]="numeroPaginaActual == $index + 1 ? 'btn-active bg-primary hover:bg-primary hover:opacity-80' : ''">{{$index + 1}}</button>
+        <button (click)="cambioDePagina($index)" class="join-item btn btn-ghost btn-sm" [ngClass]="numeroPaginaActual == $index + 1 ? 'btn-active' : ''">{{$index + 1}}</button>
       }
     </div>
   </div>

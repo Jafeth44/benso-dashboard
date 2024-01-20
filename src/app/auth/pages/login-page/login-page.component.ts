@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService, Credentials } from '../../auth.service';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { CommonModule } from '@angular/common';
 export class LoginPageComponent {
   private formBuilder = inject(FormBuilder);
   private authService = inject(AuthService);
+  private toastr      = inject(ToastrService);
   private router      = inject(Router);
   public isFormInvalid: boolean = false;
 
@@ -44,6 +46,7 @@ export class LoginPageComponent {
     try {
       await this.authService.loginWithEmail(credentials, this.form.value.persistanse!);
       this.router.navigateByUrl('/');
+      this.toastr.success("Sesión iniciada");
     } catch (error) {
       this.isFormInvalid = true;
       return;

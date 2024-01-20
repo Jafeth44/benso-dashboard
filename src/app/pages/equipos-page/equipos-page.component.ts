@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { map, Observable, take, tap } from 'rxjs';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { DataService } from '../../data/data.service';
 import { ToastrService } from 'ngx-toastr';
-import { GetEquiposLocalDto } from '../../data/dtos/GetEquiposLocal.dto';
+import { GetEquiposDto } from '../../data/dtos/GetEquipos.dto';
 
 @Component({
   standalone: true,
@@ -21,20 +21,22 @@ export class EquiposPageComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
   private dataService = inject(DataService);
   public equipo$: Observable<any[]>;
-  public equipos!: GetEquiposLocalDto[];
-  public paginaActual!: GetEquiposLocalDto[];
+  public equipos!: GetEquiposDto[];
+  public paginaActual!: GetEquiposDto[];
+
+  public searchQuery = signal<string>('');
 
   public numeroPaginas!: number;
   public numeroPaginaActual: number = 1;
 
   constructor() {
-    this.equipo$ = this.dataService.todosLosEquipos;
+    this.equipo$ = this.dataService.equipo$;
   }
 
   public ngOnInit() {
     this.equipo$.pipe(
       take(1),
-      map((equipos: GetEquiposLocalDto[]) => this.equipos = equipos),
+      map((equipos: GetEquiposDto[]) => this.equipos = equipos),
       tap(equipo => this.llenarPaginas())
     ).subscribe(x => this.numeroPaginas = Math.ceil(x.length / 10));
   }
@@ -49,5 +51,9 @@ export class EquiposPageComponent implements OnInit {
       value * 10,
       value * 10 + 10
     );
+  }
+
+  public busquedaEquipos(value: string) {
+    this.searchQuery.set(value);
   }
 }

@@ -39,6 +39,10 @@ export const appConfig: ApplicationConfig = {
       return storage;
     })),
     provideAnimations(),
-    provideToastr()
+    provideToastr({
+      closeButton: true,
+      timeOut: 2500,
+      progressBar: true,
+    })
   ],
 };

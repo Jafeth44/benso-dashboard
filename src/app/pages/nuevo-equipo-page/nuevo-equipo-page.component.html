@@ -1,4 +1,4 @@
-<div class= "shadow-2xl dark:bg-base-300 w-full rounded-2xl">
+<div class= "shadow-2xl bg-base-300 w-full h-full flex flex-col rounded-sm md:rounded-2xl">
   <div class="flex justify-between items-center w-full rounded-t-2xl bg-primary-content p-3">
     <h1 class="text-xl p-3 card-title">
       Nuevo Equipo
@@ -11,7 +11,7 @@
     </button>
   </div>
   <!-- space-y-6 -->
-  <form class="grid grid-cols-1 p-3 gap-2 lg:grid-cols-2 w-full" [formGroup]="nuevoEquipoForm" (ngSubmit)="createNewEquipo(upload)">
+  <form class="grid grid-cols-1 h-full p-3 gap-2 flex-1 lg:grid-cols-2 w-full overflow-scroll" [formGroup]="nuevoEquipoForm" (ngSubmit)="createNewEquipo(upload)">
     <div class="form-control">
       <div class="label">
         <span class="label-text">

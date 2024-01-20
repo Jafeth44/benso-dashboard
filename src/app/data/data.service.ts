@@ -3,6 +3,7 @@ import { Firestore, collection, collectionData, doc, setDoc } from '@angular/fir
 import { Observable, catchError, map, of } from 'rxjs';
 import { CrearEquipoConLocalDto } from './dtos/CreateEquipoConLocal.dto';
 import { Storage, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
+import { GetEquiposDto } from './dtos/GetEquipos.dto';
 
 export interface EquipoNuevo {
   nombre: string;
@@ -14,7 +15,7 @@ export interface EquipoNuevo {
 export class DataService {
   private readonly storage = inject(Storage);
   private firestore: Firestore = inject(Firestore);
-  private equipo$: Observable<any[]>;
+  public equipo$: Observable<GetEquiposDto[]>;
 
   constructor() {
     const aCollection = collection(this.firestore, "equipos");
@@ -24,17 +25,6 @@ export class DataService {
   public async crearEquipo(equipo: CrearEquipoConLocalDto) {
     const newDoc = await setDoc(doc(this.firestore, "equipos", equipo.activo.toString()), equipo);
     return newDoc;
-  }
-
-  public get todosLosEquipos() {
-    return this.equipo$;
-  }
-
-  public equipoPorNombre(nombre: string) {
-    return this.equipo$.pipe(
-      map(equipo => equipo.includes(nombre) ? equipo : null),
-      catchError(() => of(null))
-    )
   }
   
   public async subirImagen(input: HTMLInputElement): Promise<string | undefined> {
