@@ -3,7 +3,7 @@ import { Local } from '../models/Local.model';
 
 export class CrearEquipoConLocalDto implements Equipo, Local {
   public modelo: string;
-  public activo: number;
+  public activo: string;
   public serie: string;
   public nombreLocal?: string;
   public telefono?: string;
@@ -15,7 +15,7 @@ export class CrearEquipoConLocalDto implements Equipo, Local {
 
   constructor(
     modelo: string,
-    activo: number,
+    activo: string,
     serie: string,
     nombreLocal: string,
     telefono: string,

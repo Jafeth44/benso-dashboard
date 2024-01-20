@@ -4,7 +4,7 @@ import { Mantenimiento } from '../models/Mantenimiento.model';
 
 export class GetEquiposDto implements Equipo, Local {
   public modelo: string;
-  public activo: number;
+  public activo: string;
   public serie: string;
   public nombreLocal?: string;
   public telefono?: string;
@@ -16,7 +16,7 @@ export class GetEquiposDto implements Equipo, Local {
   public mantenimientos?: Mantenimiento[];
   constructor(
     modelo: string,
-    activo: number,
+    activo: string,
     serie: string,
     nombreLocal: string,
     telefono: string,
