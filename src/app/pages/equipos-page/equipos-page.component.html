@@ -2,7 +2,7 @@
   <div class="flex justify-between items-center w-full bg-primary-content md:rounded-t-2xl p-3 ">
     <h1 class="text-xl p-3 card-title">
       Equipos 
-      <input type="text" class="input input-bordered input-sm" placeholder="Buscar" (input)="busquedaEquipos(searchQuery.value)" #searchQuery/>
+      <input type="text" class="input input-bordered input-sm" placeholder="Buscar" (input)="busquedaEquipos(txtSearchQuery.value)" #txtSearchQuery/>
     </h1>
     <button class="btn btn-primary btn-sm mr-3" routerLink="nuevo">Nuevo 
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
@@ -10,9 +10,9 @@
     </svg>
     </button>
   </div>
-  <div class="flex-1 overflow-scroll">
+  <div class="flex-1 flex flex-col overflow-scroll">
     <!-- aqui comienza la tabla -->
-    @if(equipo$ | async) {
+    @if(equipos$ | async; as equipos) {
       <table class="table table-sm table-pin-rows">
         <!-- head -->
         <thead>
@@ -28,7 +28,7 @@
           </tr>
         </thead>
         <tbody class="overflow-y-auto">
-          @for(item of paginaActual; track $index) {
+          @for(item of equipos; track $index) {
           <tr [routerLink]="item.activo.toString()"  [classList]="$odd ? 'bg-base-100 cursor-pointer hover:bg-base-content hover:bg-opacity-30 hover:transition-all' : 'bg-base-200 cursor-pointer hover:bg-base-content hover:bg-opacity-30 hover:transition-all'" >
             <td><div class="badge badge-accent">{{ item.activo }}</div></td>
             <td class="hidden md:table-cell">{{item.fechaDeEntrega| date:'MM/dd/YY'}}</td>
@@ -42,17 +42,21 @@
           }
         </tbody>
       </table>
-      } @else {
-        @for(item of [].constructor(6); track $index) {
-          <div class="skeleton w-full h-16 m-3"></div>
+        @if(equipos.length == 0) {
+          <div class="card-title flex-1 self-center justify-self-center">La búsqueda {{searchQuery()}} no dió resultados</div>
+        }
+      }
+       @else {
+        @for(item of [].constructor(8); track $index) {
+          <div class="skeleton flex-1 m-2"></div>
         }
       }
   </div>
   <div class="flex justify-center items-center w-full bg-primary-content md:rounded-b-2xl p-3">
-    <div class="join">
-      @for (item of [].constructor(numeroPaginas); track $index) {
-        <button (click)="cambioDePagina($index)" class="join-item btn btn-ghost btn-sm" [ngClass]="numeroPaginaActual == $index + 1 ? 'btn-active' : ''">{{$index + 1}}</button>
-      }
-    </div>
+    @if(equipos$ | async; as equipos) {
+      <div class="badge badge-neutral">{{equipos.length}} Elementos</div>
+    }@else {
+      <div class="badge badge-neutral">Cargando</div>
+    }
   </div>
 </div>

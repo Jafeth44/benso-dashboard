@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { map, Observable, take, tap } from 'rxjs';
+import { combineLatest, debounceTime, map, Observable, take, tap } from 'rxjs';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { DataService } from '../../data/data.service';
 import { ToastrService } from 'ngx-toastr';
 import { GetEquiposDto } from '../../data/dtos/GetEquipos.dto';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   standalone: true,
@@ -18,27 +19,40 @@ import { GetEquiposDto } from '../../data/dtos/GetEquipos.dto';
   `,
 })
 export class EquiposPageComponent implements OnInit {
-  private activatedRoute = inject(ActivatedRoute);
+  // private activatedRoute = inject(ActivatedRoute);
   private dataService = inject(DataService);
-  public equipo$: Observable<any[]>;
+  public equipos$: Observable<GetEquiposDto[]>;
+  public searchQuery = signal<string>('');
+  public searchQuery$ = toObservable(this.searchQuery);
+
+
   public equipos!: GetEquiposDto[];
   public paginaActual!: GetEquiposDto[];
 
-  public searchQuery = signal<string>('');
 
   public numeroPaginas!: number;
   public numeroPaginaActual: number = 1;
 
   constructor() {
-    this.equipo$ = this.dataService.equipo$;
+    this.equipos$ = this.dataService.equipo$;
   }
 
-  public ngOnInit() {
-    this.equipo$.pipe(
-      take(1),
-      map((equipos: GetEquiposDto[]) => this.equipos = equipos),
-      tap(equipo => this.llenarPaginas())
-    ).subscribe(x => this.numeroPaginas = Math.ceil(x.length / 10));
+  // public ngOnInit() {
+  //   this.equipo$.pipe(
+  //     take(1),
+  //     map((equipos: GetEquiposDto[]) => this.equipos = equipos),
+  //     tap(equipo => this.llenarPaginas())
+  //   ).subscribe(x => this.numeroPaginas = Math.ceil(x.length / 10));
+  // }
+
+  public ngOnInit(): void {
+    this.equipos$ = combineLatest([
+      this.searchQuery$,
+      this.equipos$
+    ]).pipe(
+      debounceTime(500),
+      map(([search, equipos]) => equipos.filter(equipo => equipo.activo.startsWith(search)))
+    )
   }
 
   public llenarPaginas() {
