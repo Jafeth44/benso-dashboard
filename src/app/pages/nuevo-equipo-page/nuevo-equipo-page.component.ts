@@ -11,7 +11,10 @@ import { ToastrService } from 'ngx-toastr';
   standalone: true,
   imports: [ReactiveFormsModule, RouterLink, CommonModule, LoaderComponent],
   templateUrl: './nuevo-equipo-page.component.html',
-  styles: ``
+  styles: `
+      #table-container {
+      container-type: size;
+    }`,
 })
 export class NuevoEquipoPageComponent {
   private formBuilder = inject(FormBuilder);
@@ -61,7 +64,7 @@ export class NuevoEquipoPageComponent {
     try {
       const fotoUpload = await this.dataService.subirImagen(input);
       nuevoEquipo.foto = fotoUpload || "";
-      const saved = await this.dataService.crearEquipo(nuevoEquipo);
+      await this.dataService.crearEquipo(nuevoEquipo);
       this.isLoading = false;
       this.toastr.success('Se ha creado correctamente','Guardado');
       this.router.navigateByUrl('/dashboard/equipos');

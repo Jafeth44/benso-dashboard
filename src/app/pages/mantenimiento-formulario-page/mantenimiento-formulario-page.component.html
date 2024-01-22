@@ -1,1 +1,250 @@
-<p>mantenimiento-formulario-page works!</p>
+<div id="table-container" class="shadow-2xl bg-base-300 w-full h-full flex flex-col rounded-sm md:rounded-2xl">
+  <div class="flex justify-between items-center w-full rounded-t-2xl bg-primary-content p-3">
+    <h1 class="text-xl p-3 card-title">
+      Nuevo Mantenimiento
+    </h1>
+    <button class="btn btn-primary btn-sm mr-3" (click)="location.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+      </svg>
+      Regresar
+    </button>
+  </div>
+  <!-- space-y-6 -->
+  <form class="h-full p-3 gap-2 flex-1 w-full overflow-scroll" [formGroup]="nuevoMantenimientoForm" (ngSubmit)="crearNuevoMantenimiento()">
+    <div class="flex w-full">
+      <div class="flex-1">
+        <div class="label">
+          <span class="label-text">
+            Fecha
+          </span>
+        </div>
+        <input type="date" formControlName="fecha" placeholder="Fecha" class="input input-bordered input-info"/>
+      </div>
+      <div class="flex gap-2 self-end">
+        <div class="">
+          <div class="label">
+            <span class="label-text">
+              Hora Inicio
+            </span>
+          </div>
+          <input type="time" formControlName="horaInicio" placeholder="Inicio" class="input input-bordered input-info"/>
+        </div>
+        <div class="">
+          <div class="label">
+            <span class="label-text">
+              Hora Cierre
+            </span>
+          </div>
+          <input type="time" formControlName="horaCierre" placeholder="cierre" class="input input-bordered input-info"/>
+        </div>
+      </div>
+    </div>
+    <div class="form-control w-full">
+      <div class="label">
+        <span class="label-text">
+          Técnico
+        </span>
+      </div>
+      <input type="text" formControlName="tecnico" placeholder="Nombre del Técnico" class="input input-bordered w-full"/>
+    </div>
+    <div class="form-control" formGroupName="materiales">
+      <div class="label">
+        <span class="label-text">
+          Materiales
+        </span>
+      </div>
+      <div class="p-3 rounded-md border input-bordered bg-base-100 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2">
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="nitrogeno" class="checkbox checkbox-primary">
+          &nbsp;
+          Nitrógeno
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="refrigerante" class="checkbox checkbox-primary">
+          &nbsp;
+          Refrigerante
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="tuberiaCobre" class="checkbox checkbox-primary">
+          &nbsp;
+          Tuberia de Cobre
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="soldadura" class="checkbox checkbox-primary">
+          &nbsp;
+          Soldadura
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="nuBrite" class="checkbox checkbox-primary">
+          &nbsp;
+          Nu-Brite
+        </label>
+      </div>
+    </div>
+    <div class="form-contol" formGroupName="repuestos">
+      <div class="label">
+        <span class="label-text">
+          Repuestos
+        </span>        
+      </div>
+      <div class="p-3 rounded-md border input-bordered bg-base-100 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2">
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="capacitorArranque" class="checkbox checkbox-primary">
+          &nbsp;
+          Capacitor Arranque
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="capacitorPermanente" class="checkbox checkbox-primary">
+          &nbsp;
+          Capacitor Permanente
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="relay" class="checkbox checkbox-primary">
+          &nbsp;
+          Relay
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="contactor" class="checkbox checkbox-primary">
+          &nbsp;
+          Contactor
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="controlador" class="checkbox checkbox-primary">
+          &nbsp;
+          Controlador
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="sensor" class="checkbox checkbox-primary">
+          &nbsp;
+          Sensor
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="capilar" class="checkbox checkbox-primary">
+          &nbsp;
+          Capilar
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="fusibles" class="checkbox checkbox-primary">
+          &nbsp;
+          Fusibles
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="manillas" class="checkbox checkbox-primary">
+          &nbsp;
+          Manillas
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="abanicoEvaporador" class="checkbox checkbox-primary">
+          &nbsp;
+          Abanico Evaporador
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="abanicoAxial" class="checkbox checkbox-primary">
+          &nbsp;
+          Abanico Axial
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="abanicoCondensador" class="checkbox checkbox-primary">
+          &nbsp;
+          Abanico Condensador
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="pushBoton" class="checkbox checkbox-primary">
+          &nbsp;
+          Push Boton
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="tuboLedGrande" class="checkbox checkbox-primary">
+          &nbsp;
+          Tubo Led Grande
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="empaquePuerta" class="checkbox checkbox-primary">
+          &nbsp;
+          Empaque Puerta
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="compresor" class="checkbox checkbox-primary">
+          &nbsp;
+          Compresor
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="protectorTermico" class="checkbox checkbox-primary">
+          &nbsp;
+          Protector Térmico
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="tuboLedPequeno" class="checkbox checkbox-primary">
+          &nbsp;
+          Tubo Led Pequeño
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="interruptorLuz" class="checkbox checkbox-primary">
+          &nbsp;
+          Interruptor Luz
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="resistenciaDrenaje" class="checkbox checkbox-primary">
+          &nbsp;
+          Resistencia Drenaje
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="resistenciaEvaporador" class="checkbox checkbox-primary">
+          &nbsp;
+          Resistencia Evaporador
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="valvulaCarga" class="checkbox checkbox-primary">
+          &nbsp;
+          Valvula Carga
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="filtroDeshidratador" class="checkbox checkbox-primary">
+          &nbsp;
+          Filtro Deshidratador
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="resistenciaPuerta" class="checkbox checkbox-primary">
+          &nbsp;
+          Resistencia Puerta
+        </label>
+        <label class="flex w-full items-center px-3" for="nitrogeno">
+          <input type="checkbox" name="nitrogeno" formControlName="vidrioPuertas" class="checkbox checkbox-primary">
+          &nbsp;
+          Vidrio Puertas
+        </label>
+      </div>
+    </div>
+    <div class="flex flex-col xl:flex-row gap-4">
+      <div class="form-control w-full">
+        <div class="label">
+          <span class="label-text">
+            Detalle del mantenimiento
+          </span>
+        </div>
+        <textarea type="text" formControlName="detalle" placeholder="Detalle" class="textarea textarea-bordered w-full"></textarea>
+      </div>
+      <div class="form-control w-full">
+        <div class="label">
+          <span class="label-text">
+            Observaciones
+          </span>
+        </div>
+        <textarea type="text" formControlName="observaciones" placeholder="Observaciones" class="textarea textarea-bordered w-full"></textarea>
+      </div>
+    </div>
+    <div class="flex justify-center p-3 items-center w-full dark:bg-inherit col-span-1 lg:col-span-2">
+      <button class="btn btn-success btn-md">
+        Guardar
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
+        </svg>      
+      </button>
+    </div>
+  </form>
+</div>
+<!-- loader -->
+@if (isLoading) {
+  <app-loader />
+}

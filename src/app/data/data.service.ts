@@ -1,9 +1,10 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, collection, collectionData, doc, setDoc } from '@angular/fire/firestore';
+import { Firestore, arrayUnion, collection, collectionData, doc, setDoc, updateDoc } from '@angular/fire/firestore';
 import { Observable, catchError, map, of } from 'rxjs';
 import { CrearEquipoConLocalDto } from './dtos/CreateEquipoConLocal.dto';
 import { Storage, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
 import { GetEquiposDto } from './dtos/GetEquipos.dto';
+import { CrearMantenimientoDto } from './dtos/CrearMantenimiento.dto';
 
 export interface EquipoNuevo {
   nombre: string;
@@ -35,5 +36,13 @@ export class DataService {
     await uploadBytes(storageRef, file);
     const imageUrl = await getDownloadURL(storageRef);
     return imageUrl;
+  }
+
+  //todo crear dto de nuevo mantenimiento
+  public async crearMantenimiento(activo: string, mantenimiento: CrearMantenimientoDto) {
+    const updatedDoc = await updateDoc(doc(this.firestore, "equipos", activo), {
+      mantenimientos: arrayUnion(mantenimiento)
+    })
+    return updatedDoc;
   }
 }

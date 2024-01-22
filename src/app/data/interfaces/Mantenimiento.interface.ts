@@ -5,8 +5,9 @@ export interface Mantenimiento {
   fecha: Date;
   horaInicio: Date;
   horaCierre: Date;
+  tecnico: string;
   detalle: string;
   observaciones: string;
   materiales: Materiales;
-  respuestos: Repuestos;
+  repuestos: Repuestos;
 }
