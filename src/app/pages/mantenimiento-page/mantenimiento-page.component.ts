@@ -4,35 +4,46 @@ import { CommonModule } from '@angular/common';
 import { Observable, combineLatest, debounceTime, map } from 'rxjs';
 import { GetEquiposDto } from '../../data/dtos/GetEquipos.dto';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { PieChartComponent } from '../../components/pie-chart/pie-chart.component';
+import { RouterLink } from '@angular/router';
+import { AgendarMantenimientoComponent } from '../../components/agendar-mantenimieto/agendar-mantenimieto.component';
+import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink, AgendarMantenimientoComponent],
   templateUrl: './mantenimiento-page.component.html',
-  styles: ``
+  styles: /*css*/`
+  #table-container {
+    container-type: size;
+  }
+  `,
 })
 export class MantenimientoPageComponent implements OnInit {
   private dataService = inject(DataService);
   public equipos$: Observable<GetEquiposDto[]>;
-  public searchInput = signal('');
-  public searchInput$ = toObservable(this.searchInput);
+  public searchQuery = signal<string>('');
+  public searchQuery$ = toObservable(this.searchQuery);
+
 
   constructor() {
     this.equipos$ = this.dataService.equipo$;
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.equipos$ = combineLatest([
-      this.searchInput$,
+      this.searchQuery$,
       this.equipos$
     ]).pipe(
-      debounceTime(500),
-      map(([search, equipos]) => equipos.filter(x => x.activo.startsWith(search))),
+      map(([search, equipos]) => equipos.filter(equipo => 
+        equipo.activo.startsWith(search.toUpperCase()) || 
+        equipo.direccion?.includes(search.toUpperCase())
+      )),
+      debounceTime(500)
     )
   }
 
-  public busquedaEquipo(value: string): void {
-    this.searchInput.set(value);
+  public busquedaEquipos(value: string) {
+    this.searchQuery.set(value);
   }
 }

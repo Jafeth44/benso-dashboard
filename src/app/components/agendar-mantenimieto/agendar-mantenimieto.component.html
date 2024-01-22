@@ -1,0 +1,17 @@
+<dialog id="modal" class="modal">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Activo {{activo}}</h3>
+    <div class="form-control">
+      <div class="label">
+        <label class="label-text">Agendar Mantenimiento</label>
+      </div>
+      <input type="date" class="input input-bordered" (change)="fecha.set(txtFecha.value);invalid = false" #txtFecha>
+    </div>
+    <div class="modal-action">
+      <form method="dialog">
+        <button (click)="agendarMantenimiento()" class="btn btn-success mr-2" [ngClass]="{'btn-disabled': invalid}">Guardar</button>
+        <button class="btn">Cancelar</button>
+      </form>
+    </div>
+  </div>
+</dialog>

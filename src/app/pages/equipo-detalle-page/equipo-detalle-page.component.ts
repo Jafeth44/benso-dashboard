@@ -7,10 +7,11 @@ import { Observable, map, take } from 'rxjs';
 import { doc } from 'firebase/firestore';
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { GetEquiposDto } from '../../data/dtos/GetEquipos.dto';
+import { AgendarMantenimientoComponent } from '../../components/agendar-mantenimieto/agendar-mantenimieto.component';
 
 @Component({
   standalone: true,
-  imports: [RouterLink, CommonModule, LoaderComponent],
+  imports: [RouterLink, CommonModule, LoaderComponent, AgendarMantenimientoComponent],
   templateUrl: './equipo-detalle-page.component.html',
   styles: /*css*/`
     #table-container {

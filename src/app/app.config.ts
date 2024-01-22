@@ -1,6 +1,7 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, LOCALE_ID, importProvidersFrom } from '@angular/core';
 import { provideRouter, withViewTransitions } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import  localeCR  from '@angular/common/locales/es';
 
 import { getApp, initializeApp, provideFirebaseApp,  } from '@angular/fire/app';
 import { connectAuthEmulator, getAuth, provideAuth } from '@angular/fire/auth';
@@ -12,6 +13,9 @@ import { connectStorageEmulator, getStorage, provideStorage } from '@angular/fir
 import { environment } from '../environments/environment';
 import { routes } from './app.routes';
 import { provideToastr } from 'ngx-toastr';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeCR);
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -43,6 +47,7 @@ export const appConfig: ApplicationConfig = {
       closeButton: true,
       timeOut: 2500,
       progressBar: true,
-    })
+    }),
+    {provide: LOCALE_ID, useValue: 'es-CR'}
   ],
 };
