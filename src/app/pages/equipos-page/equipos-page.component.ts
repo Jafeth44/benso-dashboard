@@ -37,21 +37,13 @@ export class EquiposPageComponent implements OnInit {
     this.equipos$ = this.dataService.equipo$;
   }
 
-  // public ngOnInit() {
-  //   this.equipo$.pipe(
-  //     take(1),
-  //     map((equipos: GetEquiposDto[]) => this.equipos = equipos),
-  //     tap(equipo => this.llenarPaginas())
-  //   ).subscribe(x => this.numeroPaginas = Math.ceil(x.length / 10));
-  // }
-
   public ngOnInit(): void {
     this.equipos$ = combineLatest([
       this.searchQuery$,
       this.equipos$
     ]).pipe(
       debounceTime(500),
-      map(([search, equipos]) => equipos.filter(equipo => equipo.activo.startsWith(search)))
+      map(([search, equipos]) => equipos.filter(equipo => equipo.activo.startsWith(search.toUpperCase()) || equipo.direccion?.includes(search.toUpperCase())))
     )
   }
 

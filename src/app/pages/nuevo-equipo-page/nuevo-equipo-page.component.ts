@@ -51,13 +51,13 @@ export class NuevoEquipoPageComponent {
       return;
     }
     const nuevoEquipo: CrearEquipoConLocalDto = {
-      modelo: this.nuevoEquipoForm.value.modelo,
       activo: this.nuevoEquipoForm.value.activo,
-      serie: this.nuevoEquipoForm.value.serie,
-      nombreLocal: this.nuevoEquipoForm.value.nombreLocal,
+      modelo: this.nuevoEquipoForm.value.modelo.toUpperCase(),
+      serie: this.nuevoEquipoForm.value.serie.toUpperCase(),
+      nombreLocal: this.nuevoEquipoForm.value.nombreLocal.toUpperCase(),
       telefono: this.nuevoEquipoForm.value.telefono.replace(/\D/g,''),
-      direccion: this.nuevoEquipoForm.value.direccion,
-      encargado: this.nuevoEquipoForm.value.encargado,
+      direccion: this.nuevoEquipoForm.value.direccion.toUpperCase(),
+      encargado: this.nuevoEquipoForm.value.encargado.toUpperCase(),
       fechaDeEntrega: this.nuevoEquipoForm.value.fechaDeEntrega,
       ubicacion: this.nuevoEquipoForm.value.ubicacion,
     }
