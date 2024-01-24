@@ -1,5 +1,6 @@
 export class Local {
   public id?: string;
+  public cliente?: string;
   public nombreLocal?: string;
   public telefono?: string;
   public direccion?: string;
@@ -9,6 +10,7 @@ export class Local {
   public foto?: string;
   constructor(
     id: string | undefined,
+    cliente: string,
     nombreLocal: string,
     telefono: string,
     direccion: string,
@@ -18,6 +20,7 @@ export class Local {
     foto?: string
   ) {
     this.id = id;
+    this.cliente = cliente;
     this.nombreLocal = nombreLocal;
     this.telefono = telefono;
     this.direccion = direccion;

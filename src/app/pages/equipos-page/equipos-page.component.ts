@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { combineLatest, debounceTime, map, Observable } from 'rxjs';
 import { DataService } from '../../data/data.service';
 import { GetEquiposDto } from '../../data/dtos/GetEquipos.dto';
@@ -19,6 +19,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
 
 export class EquiposPageComponent implements OnInit {
   private dataService = inject(DataService);
+  private router = inject(Router);
   public equipos$: Observable<GetEquiposDto[]>;
   public searchQuery = signal<string>('');
   public searchQuery$ = toObservable(this.searchQuery);
@@ -33,8 +34,10 @@ export class EquiposPageComponent implements OnInit {
       this.equipos$
     ]).pipe(
       map(([search, equipos]) => equipos.filter(equipo => 
-        equipo.activo.startsWith(search.toUpperCase()) || 
-        equipo.direccion?.includes(search.toUpperCase())
+        equipo.activo?.startsWith(search.toUpperCase()) || 
+        equipo.direccion?.includes(search.toUpperCase()) ||
+        equipo.cliente?.includes(search.toUpperCase()) ||
+        equipo.nombreLocal?.includes(search.toUpperCase())
       )),
       debounceTime(500)
     )

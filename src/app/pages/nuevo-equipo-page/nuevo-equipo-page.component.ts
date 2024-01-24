@@ -1,26 +1,32 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { DataService } from '../../data/data.service';
 import { CrearEquipoConLocalDto } from '../../data/dtos/CreateEquipoConLocal.dto';
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { ToastrService } from 'ngx-toastr';
+import { AutocompleteComponent } from '../../components/autocomplete/autocomplete.component';
+import { Observable, map, tap } from 'rxjs';
+import { GetEquiposDto } from '../../data/dtos/GetEquipos.dto';
 
 @Component({
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, CommonModule, LoaderComponent],
+  imports: [ReactiveFormsModule, RouterLink, CommonModule, LoaderComponent, AutocompleteComponent],
   templateUrl: './nuevo-equipo-page.component.html',
   styles: `
       #table-container {
       container-type: size;
     }`,
 })
-export class NuevoEquipoPageComponent {
+export class NuevoEquipoPageComponent implements OnInit {
   private formBuilder = inject(FormBuilder);
   private dataService = inject(DataService);
   private toastr = inject(ToastrService);
   private router = inject(Router);
+
+  public equipos$: Observable<GetEquiposDto[]> = this.dataService.equipo$;
+  public clientes!: Observable<string[]>;
   public isLoading: boolean = false;
   public isFormInvalid: boolean = false;
 
@@ -28,6 +34,7 @@ export class NuevoEquipoPageComponent {
     modelo: ['', Validators.required],
     activo: ['', Validators.required],
     serie: ['', Validators.required],
+    cliente: [''],
     nombreLocal: [''],
     telefono: ['', Validators.pattern(/^\d{8}$|^\d{4}\s\d{4}$|^\d{4}\-\d{4}$/)],
     direccion: [''],
@@ -36,6 +43,12 @@ export class NuevoEquipoPageComponent {
     ubicacion: [''],
     foto: ['']
   })
+
+  public ngOnInit(): void {
+    this.clientes = this.equipos$.pipe(
+      map((equipos) => [...new Set(equipos.map(e => e.cliente!).sort())])
+    )
+  }
 
   public  resetFormStatus(): void {
     this.isFormInvalid = false;
@@ -54,6 +67,7 @@ export class NuevoEquipoPageComponent {
       activo: this.nuevoEquipoForm.value.activo,
       modelo: this.nuevoEquipoForm.value.modelo.toUpperCase(),
       serie: this.nuevoEquipoForm.value.serie.toUpperCase(),
+      cliente: this.nuevoEquipoForm.value.cliente.toUpperCase(),
       nombreLocal: this.nuevoEquipoForm.value.nombreLocal.toUpperCase(),
       telefono: this.nuevoEquipoForm.value.telefono.replace(/\D/g,''),
       direccion: this.nuevoEquipoForm.value.direccion.toUpperCase(),

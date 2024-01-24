@@ -14,10 +14,6 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/home-page/home-page.component').then(c => c.HomePageComponent),
       },
       {
-        path: 'stats',
-        loadComponent: () => import('./pages/stats-page/stats-page.component').then(c => c.StatsPageComponent),
-      },
-      {
         path: 'clients',
         loadComponent: () => import('./pages/clients-page/clients-page.component').then(c => c.ClientsPageComponent),
       },
@@ -46,6 +42,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/mantenimiento-formulario-page/mantenimiento-formulario-page.component').then(c => c.MantenimientoFormularioPageComponent),
       },
       {
+        path: 'settings',
+        loadComponent: () => import('./pages/settings-page/settings-page.component').then(c => c.SettingsPageComponent)
+      },
+      {
         path: '**',
         redirectTo: '',
       },
@@ -59,10 +59,6 @@ export const routes: Routes = [
       {
         path: 'login',
         loadComponent: () => import('./auth/pages/login-page/login-page.component').then(c => c.LoginPageComponent)
-      },
-      {
-        path: 'register',
-        loadComponent: () => import('./auth/pages/register-page/register-page.component').then(c => c.RegisterPageComponent)
       },
       {
         path: '**',

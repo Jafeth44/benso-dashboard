@@ -22,8 +22,8 @@ export class LoginPageComponent {
 
   public form = this.formBuilder.group(
     {
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
       persistanse: false
     } 
   );
@@ -39,7 +39,7 @@ export class LoginPageComponent {
       return;
     };
     const credentials: Credentials = {
-      email: this.form.value.email!,
+      account: this.form.value.email!,
       password: this.form.value.password!
     }
 

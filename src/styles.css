@@ -229,3 +229,11 @@ button.toast-close-button {
     transform: scale(1) translateY(-45%) translateX(13%);
   }
 }
+
+
+@media (prefers-color-scheme: dark) {
+  .mat-mdc-autocomplete-panel {
+    background-color: #1d232a !important;
+  }
+}
+

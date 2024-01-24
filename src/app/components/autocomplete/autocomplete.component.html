@@ -1,0 +1,16 @@
+<input 
+  type="text" 
+  class="input input-bordered w-full" 
+  tabindex="0"
+  (focus)="open = !open"
+  [placeholder]="placeholder"
+  [value]="input()"
+  (input)="filtroClientes(txtValue.value)"
+  [matAutocomplete]="auto"
+  #txtValue
+/>
+<mat-autocomplete class="text-sm" autoActiveFirstOption #auto="matAutocomplete">
+  @for(item of items$ | async; track $index) {
+    <mat-option [value]="item">{{item}}</mat-option>
+  }
+</mat-autocomplete>

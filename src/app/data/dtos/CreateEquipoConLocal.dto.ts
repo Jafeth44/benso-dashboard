@@ -5,6 +5,7 @@ export class CrearEquipoConLocalDto implements Equipo, Local {
   public modelo: string;
   public activo: string;
   public serie: string;
+  public cliente?: string | undefined;
   public nombreLocal?: string;
   public telefono?: string;
   public direccion?: string;
@@ -17,6 +18,7 @@ export class CrearEquipoConLocalDto implements Equipo, Local {
     modelo: string,
     activo: string,
     serie: string,
+    cliente: string,
     nombreLocal: string,
     telefono: string,
     direccion: string,
@@ -28,6 +30,7 @@ export class CrearEquipoConLocalDto implements Equipo, Local {
     this.modelo = modelo;
     this.activo = activo;
     this.serie = serie;
+    this.cliente = cliente;
     this.nombreLocal = nombreLocal;
     this.telefono = telefono;
     this.direccion = direccion;

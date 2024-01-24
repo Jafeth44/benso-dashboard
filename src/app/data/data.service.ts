@@ -6,10 +6,6 @@ import { Storage, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage
 import { GetEquiposDto } from './dtos/GetEquipos.dto';
 import { CrearMantenimientoDto } from './dtos/CrearMantenimiento.dto';
 
-export interface EquipoNuevo {
-  nombre: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -38,7 +34,6 @@ export class DataService {
     return imageUrl;
   }
 
-  //todo crear dto de nuevo mantenimiento
   public async crearMantenimiento(activo: string, mantenimiento: CrearMantenimientoDto) {
     const updatedDoc = await updateDoc(doc(this.firestore, "equipos", activo), {
       mantenimientos: arrayUnion(mantenimiento)

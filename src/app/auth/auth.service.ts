@@ -1,46 +1,47 @@
 import { Injectable, inject } from '@angular/core';
-import { AppCheck } from '@angular/fire/app-check';
+
 import {
   Auth,
   authState,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  updatePassword,
 } from '@angular/fire/auth';
 import {
   setPersistence,
   browserSessionPersistence,
   browserLocalPersistence,
+  updateProfile,
 } from 'firebase/auth';
 
 export type Credentials = {
-  email: string;
+  account: string;
   password: string;
 };
+
+const emailProvider = '@equiposbenso.com';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private auth: Auth = inject(Auth);
-  private appCheck = inject(AppCheck);
   public readonly authState$ = authState(this.auth);
 
   public registerWithEmail(credentials: Credentials) {
-    const { email, password } = credentials;
-    return createUserWithEmailAndPassword(this.auth, email, password);
+    const { account, password } = credentials;
+    return createUserWithEmailAndPassword(this.auth, account+emailProvider, password);
   }
 
   public async loginWithEmail(credentials: Credentials, persistanseValue: boolean) {
-
+    const { account, password } = credentials;
     const persistanse = persistanseValue
       ? browserLocalPersistence
       : browserSessionPersistence;
-
-    const { email, password } = credentials;
-
+      
     await setPersistence(this.auth, persistanse);
-    await signInWithEmailAndPassword(this.auth, email, password);
+    await signInWithEmailAndPassword(this.auth, account+emailProvider, password);
   }
 
   public logout() {
