@@ -3,9 +3,9 @@ import { Local } from '../models/Local.model';
 import { Mantenimiento } from '../interfaces/Mantenimiento.interface';
 
 export class GetEquiposDto implements Equipo, Local {
-  public modelo: string;
   public activo: string;
-  public serie: string;
+  public modelo?: string;
+  public serie?: string;
   public cliente?: string | undefined;
   public nombreLocal?: string;
   public telefono?: string;

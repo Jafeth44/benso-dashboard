@@ -31,9 +31,9 @@ export class NuevoEquipoPageComponent implements OnInit {
   public isFormInvalid: boolean = false;
 
   public nuevoEquipoForm: FormGroup = this.formBuilder.group({
-    modelo: ['', Validators.required],
     activo: ['', Validators.required],
-    serie: ['', Validators.required],
+    modelo: [''],
+    serie: [''],
     cliente: [''],
     nombreLocal: [''],
     telefono: ['', Validators.pattern(/^\d{8}$|^\d{4}\s\d{4}$|^\d{4}\-\d{4}$/)],
