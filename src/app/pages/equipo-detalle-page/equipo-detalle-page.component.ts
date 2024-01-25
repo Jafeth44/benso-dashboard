@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { Firestore, docData } from '@angular/fire/firestore';
@@ -25,6 +25,7 @@ export class EquipoDetallePageComponent {
   private activatedRoute = inject(ActivatedRoute);
   private firestore = inject(Firestore);
   public equipo$: Observable<GetEquiposDto>;
+  public location = inject(Location);
   public route: string;
   public sortBy = sortByProperty;
 
