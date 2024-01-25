@@ -74,6 +74,7 @@ export class NuevoEquipoPageComponent implements OnInit {
       encargado: this.nuevoEquipoForm.value.encargado.toUpperCase(),
       fechaDeEntrega: this.nuevoEquipoForm.value.fechaDeEntrega,
       ubicacion: this.nuevoEquipoForm.value.ubicacion,
+      proximoMantenimiento: ''
     }
     try {
       const fotoUpload = await this.dataService.subirImagen(input);

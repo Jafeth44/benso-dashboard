@@ -16,7 +16,6 @@ import { toObservable } from '@angular/core/rxjs-interop';
   }
   `,
 })
-
 export class EquiposPageComponent implements OnInit {
   private dataService = inject(DataService);
   private router = inject(Router);

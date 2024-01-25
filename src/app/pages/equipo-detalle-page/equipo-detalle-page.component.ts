@@ -5,6 +5,8 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Firestore, docData } from '@angular/fire/firestore';
 import { Observable, map, take } from 'rxjs';
 import { doc } from 'firebase/firestore';
+
+import { sortByProperty } from 'sort-by-property';
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { GetEquiposDto } from '../../data/dtos/GetEquipos.dto';
 import { AgendarMantenimientoComponent } from '../../components/agendar-mantenimieto/agendar-mantenimieto.component';
@@ -24,6 +26,7 @@ export class EquipoDetallePageComponent {
   private firestore = inject(Firestore);
   public equipo$: Observable<GetEquiposDto>;
   public route: string;
+  public sortBy = sortByProperty;
 
   constructor() {
     this.route = this.activatedRoute.snapshot.params['id'];

@@ -11,24 +11,24 @@
     </button>
   </div>
   <!-- space-y-6 -->
-  <form class="h-full px-2 md:px-5 gap-2 flex-1 w-full overflow-scroll" [formGroup]="nuevoMantenimientoForm" (ngSubmit)="crearNuevoMantenimiento()">
-    <div class="flex w-full">
+  <form class="h-full px-2 md:px-5 gap-2 text-xs md:text-base teflex-1 w-full overflow-scroll" [formGroup]="nuevoMantenimientoForm" (ngSubmit)="crearNuevoMantenimiento()">
+    <div class="flex w-full gap-2">
       <div class="flex-1">
         <div class="label">
           <span class="label-text">
             Fecha
           </span>
         </div>
-        <input type="date" formControlName="fecha" placeholder="Fecha" class="input input-bordered input-info"/>
+        <input type="date" formControlName="fecha" class="input input-bordered input-info w-full"/>
       </div>
-      <div class="flex gap-2 self-end">
+      <div class="flex h-full gap-2 self-end">
         <div class="">
           <div class="label">
             <span class="label-text">
               Hora Inicio
             </span>
           </div>
-          <input type="time" formControlName="horaInicio" placeholder="Inicio" class="input input-bordered input-info"/>
+          <input type="time" formControlName="horaInicio" class="input input-bordered input-info w-full"/>
         </div>
         <div class="">
           <div class="label">
@@ -36,7 +36,7 @@
               Hora Cierre
             </span>
           </div>
-          <input type="time" formControlName="horaCierre" placeholder="cierre" class="input input-bordered input-info"/>
+          <input type="time" formControlName="horaCierre" class="input input-bordered input-info w-full"/>
         </div>
       </div>
     </div>
@@ -48,7 +48,7 @@
       </div>
       <input type="text" formControlName="tecnico" placeholder="Nombre del Técnico" class="input input-bordered w-full"/>
     </div>
-    <div class="form-control" formGroupName="materiales">
+    <div class="form-control text-xs md:text-base" formGroupName="materiales" >
       <div class="label">
         <span class="label-text">
           Materiales
@@ -82,7 +82,7 @@
         </label>
       </div>
     </div>
-    <div class="form-contol" formGroupName="repuestos">
+    <div class="form-contol text-xs md:text-base" formGroupName="repuestos">
       <div class="label">
         <span class="label-text">
           Repuestos

@@ -8,6 +8,7 @@ import { RouterLink } from '@angular/router';
 import { AgendarMantenimientoComponent } from '../../components/agendar-mantenimieto/agendar-mantenimieto.component';
 import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
+import { sortByProperty } from 'sort-by-property';
 
 @Component({
   standalone: true,
@@ -24,7 +25,7 @@ export class MantenimientoPageComponent implements OnInit {
   public equipos$: Observable<GetEquiposDto[]>;
   public searchQuery = signal<string>('');
   public searchQuery$ = toObservable(this.searchQuery);
-
+  public sortBy = sortByProperty;
 
   constructor() {
     this.equipos$ = this.dataService.equipo$;
