@@ -27,7 +27,7 @@ export class ClientsPageComponent implements OnInit {
   public equiposPorCliente: string[] = [];
 
   constructor() {
-    this.equipos$ = this.dataService.equipo$;
+    this.equipos$ = this.dataService.equipos$;
   }
 
   public ngOnInit(): void {

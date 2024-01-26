@@ -25,8 +25,9 @@ export class NuevoEquipoPageComponent implements OnInit {
   private toastr = inject(ToastrService);
   private router = inject(Router);
 
-  public equipos$: Observable<GetEquiposDto[]> = this.dataService.equipo$;
+  public equipos$: Observable<GetEquiposDto[]> = this.dataService.equipos$;
   public clientes!: Observable<string[]>;
+  public esAdmin$ = this.dataService.isAdmin$;
   public isLoading: boolean = false;
   public isFormInvalid: boolean = false;
 

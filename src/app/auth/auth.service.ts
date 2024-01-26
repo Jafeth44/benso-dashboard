@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 
 import {
   Auth,
@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updatePassword,
+  user,
 } from '@angular/fire/auth';
 import {
   setPersistence,
@@ -39,7 +40,7 @@ export class AuthService {
     const persistanse = persistanseValue
       ? browserLocalPersistence
       : browserSessionPersistence;
-      
+  
     await setPersistence(this.auth, persistanse);
     await signInWithEmailAndPassword(this.auth, account+emailProvider, password);
   }

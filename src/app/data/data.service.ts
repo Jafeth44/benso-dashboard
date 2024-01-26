@@ -1,10 +1,16 @@
 import { Injectable, inject } from '@angular/core';
 import { Firestore, arrayUnion, collection, collectionData, doc, setDoc, updateDoc } from '@angular/fire/firestore';
-import { Observable, catchError, map, of } from 'rxjs';
+import { Observable, catchError, combineLatest, first, map, of, take, tap } from 'rxjs';
 import { CrearEquipoConLocalDto } from './dtos/CreateEquipoConLocal.dto';
 import { Storage, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
 import { GetEquiposDto } from './dtos/GetEquipos.dto';
 import { CrearMantenimientoDto } from './dtos/CrearMantenimiento.dto';
+import { AuthService } from '../auth/auth.service';
+
+export interface Administradores {
+  name: string;
+  isAdmin: boolean;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +18,23 @@ import { CrearMantenimientoDto } from './dtos/CrearMantenimiento.dto';
 export class DataService {
   private readonly storage = inject(Storage);
   private firestore: Firestore = inject(Firestore);
-  public equipo$: Observable<GetEquiposDto[]>;
+  private AuthService = inject(AuthService);
+  public equipos$: Observable<GetEquiposDto[]>;
+  public administradores$: Observable<Administradores[]>;
+  public isAdmin$: Observable<boolean>;
 
   constructor() {
     const aCollection = collection(this.firestore, "equipos");
-    this.equipo$ = collectionData(aCollection) as Observable<any[]>;
+    const bCollection = collection(this.firestore, "administradores");
+    this.equipos$ = collectionData(aCollection) as Observable<any[]>;
+    this.administradores$ = collectionData(bCollection) as Observable<any[]>;
+    this.isAdmin$ = combineLatest([
+      this.AuthService.authState$,
+      this.administradores$
+    ]).pipe(
+      map(([user, admins]) => admins.find(admin => admin.name == user?.email)),
+      map(admin => admin ? true : false)
+    )
   }
 
   public async crearEquipo(equipo: CrearEquipoConLocalDto) {
@@ -33,7 +51,7 @@ export class DataService {
   
   public async subirImagen(input: HTMLInputElement): Promise<string | undefined> {
     if (!input.files?.item(0)) return undefined;
-
+  
     const file = input.files[0];
     const storageRef = ref(this.storage, file.name);
     await uploadBytes(storageRef, file);

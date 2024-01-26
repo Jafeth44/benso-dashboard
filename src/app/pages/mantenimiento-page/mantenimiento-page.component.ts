@@ -28,7 +28,7 @@ export class MantenimientoPageComponent implements OnInit {
   public sortBy = sortByProperty;
 
   constructor() {
-    this.equipos$ = this.dataService.equipo$;
+    this.equipos$ = this.dataService.equipos$;
   }
 
   public ngOnInit(): void {

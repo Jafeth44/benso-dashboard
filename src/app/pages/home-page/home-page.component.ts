@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { DataService } from '../../data/data.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-home-page',
@@ -9,5 +11,4 @@ import { RouterLink } from '@angular/router';
   styles: ''
 })
 export class HomePageComponent {
-  
 }

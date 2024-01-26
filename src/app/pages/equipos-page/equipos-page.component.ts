@@ -18,13 +18,14 @@ import { toObservable } from '@angular/core/rxjs-interop';
 })
 export class EquiposPageComponent implements OnInit {
   private dataService = inject(DataService);
-  private router = inject(Router);
+
+  public esAdmin$ = this.dataService.isAdmin$;
   public equipos$: Observable<GetEquiposDto[]>;
   public searchQuery = signal<string>('');
   public searchQuery$ = toObservable(this.searchQuery);
 
   constructor() {
-    this.equipos$ = this.dataService.equipo$;
+    this.equipos$ = this.dataService.equipos$;
   }
 
   public ngOnInit(): void {

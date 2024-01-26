@@ -10,108 +10,117 @@
       Regresar
     </button>
   </div>
-  <!-- space-y-6 -->
-  <form class="grid grid-cols-1 h-full p-3 gap-2 flex-1 lg:grid-cols-2 w-full overflow-scroll" [formGroup]="nuevoEquipoForm" (ngSubmit)="createNewEquipo(upload)">
-    <div class="form-control">
-      <div class="label">
-        <span class="label-text">
-          Activo *
-        </span>
-        <span class="label-text-alt">
-          Este campo es obligatorio
-        </span>
+  @if(esAdmin$ | async) {
+    <!-- space-y-6 -->
+    <form class="grid grid-cols-1 h-full p-3 gap-2 flex-1 lg:grid-cols-2 w-full overflow-scroll" [formGroup]="nuevoEquipoForm" (ngSubmit)="createNewEquipo(upload)">
+      <div class="form-control">
+        <div class="label">
+          <span class="label-text">
+            Activo *
+          </span>
+          <span class="label-text-alt">
+            Este campo es obligatorio
+          </span>
+        </div>
+        <input type="text" formControlName="activo" placeholder="Activo" class="input input-bordered input-info w-full"/>
       </div>
-      <input type="text" formControlName="activo" placeholder="Activo" class="input input-bordered input-info w-full"/>
-    </div>
-        <div class="form-control">
-          <div class="label">
-            <span class="label-text">
-              Modelo
-            </span>
+          <div class="form-control">
+            <div class="label">
+              <span class="label-text">
+                Modelo
+              </span>
+            </div>
+            <input type="text" formControlName="modelo" placeholder="Modelo" class="input input-bordered w-full"/>
           </div>
-          <input type="text" formControlName="modelo" placeholder="Modelo" class="input input-bordered w-full"/>
-        </div>
-        <div class="form-control">
-          <div class="label">
-            <span class="label-text">
-              Serie
-            </span>
+          <div class="form-control">
+            <div class="label">
+              <span class="label-text">
+                Serie
+              </span>
+            </div>
+            <input type="text" formControlName="serie" placeholder="Serie" class="input input-bordered w-full"/>
           </div>
-          <input type="text" formControlName="serie" placeholder="Serie" class="input input-bordered w-full"/>
-        </div>
-        <div class="form-control w-full">
-          <div class="label">
-            <span class="label-text">
-              Cliente
-            </span>
+          <div class="form-control w-full">
+            <div class="label">
+              <span class="label-text">
+                Cliente
+              </span>
+            </div>
+            <app-autocomplete [items$]="clientes" placeholder="Cliente"/>
           </div>
-          <app-autocomplete [items$]="clientes" placeholder="Cliente"/>
-        </div>
-        <div class="form-control w-full">
-          <div class="label">
-            <span class="label-text">
-              Nombre del Local
-            </span>
+          <div class="form-control w-full">
+            <div class="label">
+              <span class="label-text">
+                Nombre del Local
+              </span>
+            </div>
+            <input type="text" formControlName="nombreLocal" placeholder="Nombre del local" class="input input-bordered w-full"/>
           </div>
-          <input type="text" formControlName="nombreLocal" placeholder="Nombre del local" class="input input-bordered w-full"/>
-        </div>
-        <div class="form-control w-full">
-          <div class="label">
-            <span class="label-text">
-              Teléfono
-            </span>
+          <div class="form-control w-full">
+            <div class="label">
+              <span class="label-text">
+                Teléfono
+              </span>
+            </div>
+            <input type="text" formControlName="telefono" placeholder="Teléfono" class="input input-bordered w-full"/>
           </div>
-          <input type="text" formControlName="telefono" placeholder="Teléfono" class="input input-bordered w-full"/>
-        </div>
-        <div class="form-control w-full">
-          <div class="label">
-            <span class="label-text">
-              Dirección
-            </span>
+          <div class="form-control w-full">
+            <div class="label">
+              <span class="label-text">
+                Dirección
+              </span>
+            </div>
+            <textarea type="text" formControlName="direccion" placeholder="Dirección" class="textarea textarea-bordered w-full"></textarea>
           </div>
-          <textarea type="text" formControlName="direccion" placeholder="Dirección" class="textarea textarea-bordered w-full"></textarea>
-        </div>
-        <div class="form-control w-full">
-          <div class="label">
-            <span class="label-text">
-              Encargado
-            </span>
+          <div class="form-control w-full">
+            <div class="label">
+              <span class="label-text">
+                Encargado
+              </span>
+            </div>
+            <input type="text" formControlName="encargado" placeholder="Encargado" class="input input-bordered w-full"/>
           </div>
-          <input type="text" formControlName="encargado" placeholder="Encargado" class="input input-bordered w-full"/>
-        </div>
-        <div class="form-control w-full">
-          <div class="label">
-            <span class="label-text">
-              Fecha de Entrega
-            </span>
+          <div class="form-control w-full">
+            <div class="label">
+              <span class="label-text">
+                Fecha de Entrega
+              </span>
+            </div>
+            <input type="date" formControlName="fechaDeEntrega" class="input input-bordered w-full"/>
           </div>
-          <input type="date" formControlName="fechaDeEntrega" class="input input-bordered w-full"/>
-        </div>
-        <div class="form-control w-full">
-          <div class="label">
-            <span class="label-text">
-              Ubicación
-            </span>
+          <div class="form-control w-full">
+            <div class="label">
+              <span class="label-text">
+                Ubicación
+              </span>
+            </div>
+            <input type="text" formControlName="ubicacion" class="input input-bordered w-full" placeholder="Link de google maps o waze"/>
           </div>
-          <input type="text" formControlName="ubicacion" class="input input-bordered w-full" placeholder="Link de google maps o waze"/>
-        </div>
-        <div class="form-control w-full">
-          <div class="label">
-            <span class="label-text">
-              Foto
-            </span>
+          <div class="form-control w-full">
+            <div class="label">
+              <span class="label-text">
+                Foto
+              </span>
+            </div>
+            <input type="file" accept="image/*" #upload formControlName="foto" class="file-input file-input-bordered w-full"/>
           </div>
-          <input type="file" accept="image/*" #upload formControlName="foto" class="file-input file-input-bordered w-full"/>
-        </div>
-        <div class="flex justify-center p-3 items-center w-full dark:bg-inherit col-span-1 lg:col-span-2">
-          <button type="submit" class="btn btn-success btn-md">
-            Guardar
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
-            </svg>      
-          </button>
-        </div>
-  </form>
+          <div class="flex justify-center p-3 items-center w-full dark:bg-inherit col-span-1 lg:col-span-2">
+            <button type="submit" class="btn btn-success btn-md">
+              Guardar
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
+              </svg>      
+            </button>
+          </div>
+    </form>
+  }@else {
+      <div class="w-full h-full flex font-semibold flex-col justify-center items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-error">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+        </svg>      
+        No cuenta con el permiso suficiente para ver esta sección
+      </div>
+  }
 </div>
 
 <!-- loader -->
