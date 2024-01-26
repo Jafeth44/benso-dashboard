@@ -31,7 +31,7 @@ export const routes: Routes = [
       },
       {
         path: 'equipos/:id/editar',
-        loadComponent: () => import('./pages/nuevo-equipo-page/nuevo-equipo-page.component').then(c => c.NuevoEquipoPageComponent)
+        loadComponent: () => import('./pages/editar-equipo-page/editar-equipo-page.component').then(c => c.EditarEquipoPageComponent)
       },
       {
         path: 'mantenimiento',

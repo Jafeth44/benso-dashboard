@@ -23,6 +23,13 @@ export class DataService {
     const newDoc = await setDoc(doc(this.firestore, "equipos", equipo.activo.toString()), equipo);
     return newDoc;
   }
+
+  public async updateEquipo(activo: string, equipo: CrearEquipoConLocalDto) {
+    const updatedDoc = await updateDoc(doc(this.firestore, "equipos", activo), {
+      ...equipo
+    })
+    return updatedDoc;
+  }
   
   public async subirImagen(input: HTMLInputElement): Promise<string | undefined> {
     if (!input.files?.item(0)) return undefined;

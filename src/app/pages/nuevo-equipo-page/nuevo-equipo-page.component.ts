@@ -46,7 +46,7 @@ export class NuevoEquipoPageComponent implements OnInit {
 
   public ngOnInit(): void {
     this.clientes = this.equipos$.pipe(
-      map((equipos) => [...new Set(equipos.map(e => e.cliente!).sort())])
+      map((equipos) => [...new Set(equipos.map(e => e.cliente!).sort())].filter(c => c != ''))
     )
   }
 
