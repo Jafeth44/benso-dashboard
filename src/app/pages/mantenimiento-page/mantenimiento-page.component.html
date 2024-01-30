@@ -27,7 +27,7 @@
               @if(item.mantenimientos) {
                 @for(mantenimiento of item.mantenimientos.sort(sortBy('fecha', 'desc')); track $index) {
                   <div class="w-full flex">
-                    <div class="p-3 w-full md:mx-4 my-1 rounded-xl md:text-xl flex justify-between cursor-pointer hover:bg-base-content hover:bg-opacity-30 hover:transition-all">
+                    <div [routerLink]="'/dashboard/mantenimiento/'+item.activo+'/'+$index" class="p-3 w-full md:mx-4 my-1 rounded-xl md:text-xl flex justify-between cursor-pointer hover:bg-base-content hover:bg-opacity-30 hover:transition-all">
                       <span>Técnico: {{mantenimiento.tecnico | titlecase}}</span>
                       <span class="font-bold">Fecha: {{mantenimiento.fecha| date:'dd/MM/yy'}}</span>
                     </div>
