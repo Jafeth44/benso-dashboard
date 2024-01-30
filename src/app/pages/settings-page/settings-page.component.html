@@ -1,3 +1,30 @@
-@if(isLoading) {
-  <app-loader />
-}
+<div id="table-container" class= "shadow-2xl bg-primary-content w-full h-full flex flex-col rounded-sm md:rounded-2xl">
+  <div class="flex justify-between items-center w-full rounded-t-2xl p-1 md:p-3">
+    <div class="text-xl p-3 card-title">
+      Configuariones
+    </div>
+    <button class="btn btn-primary btn-sm mr-3" (click)="location.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+      </svg>
+      Regresar
+    </button>
+  </div>
+  @if(user$ | async; as user) {
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">
+          informacion personal
+        </div>
+        <p>
+          {{user.displayName || 'aún no tiene'}}
+        </p>
+        <p>
+          {{user.email}}
+        </p>
+      </div>
+    </div>
+  }@else {
+    <app-loader />
+  }
+</div>

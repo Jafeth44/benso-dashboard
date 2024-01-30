@@ -1,18 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DataService } from '../../data/data.service';
 import { CrearEquipoConLocalDto } from '../../data/dtos/CreateEquipoConLocal.dto';
 import { ToastrService } from 'ngx-toastr';
 import { AutocompleteComponent } from '../../components/autocomplete/autocomplete.component';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, combineLatest, map, tap } from 'rxjs';
 import { GetEquiposDto } from '../../data/dtos/GetEquipos.dto';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, CommonModule, LoaderComponent, AutocompleteComponent],
+  imports: [ReactiveFormsModule, RouterLink, CommonModule, LoaderComponent, AutocompleteComponent, MatAutocompleteModule],
   templateUrl: './editar-equipo-page.component.html',
   styles: `
       #table-container {
@@ -34,8 +36,25 @@ export class EditarEquipoPageComponent implements OnInit {
   public isFormInvalid: boolean = false;
   public route = this.activatedRoute.snapshot.params['id'];
   public nuevoEquipoForm!: FormGroup;
+  public items$!: Observable<string[]>;
+
+  public input = signal('');
+  public input$ = toObservable(this.input);
 
   public ngOnInit(): void {
+    this.clientes = this.equipos$.pipe(
+      map((equipos) => [...new Set(equipos.map(e => e.cliente!))].filter(c => c != ''))
+    );
+
+    this.items$ = combineLatest([
+      this.clientes,
+      this.input$
+    ]).pipe(
+      map(([items, input]) => items.filter(
+        item => item.includes(input.toUpperCase())
+      )),
+    )
+
     this.equipos$.pipe(
       map((equipos) => equipos.find(equipo => equipo.activo == this.route)),
       map((equipo)  => this.formBuilder.group({
@@ -52,10 +71,11 @@ export class EditarEquipoPageComponent implements OnInit {
           })    
       ),
     ).subscribe((equipoForm) => this.nuevoEquipoForm = equipoForm);
+  }
 
-    this.clientes = this.equipos$.pipe(
-      map((equipos) => [...new Set(equipos.map(e => e.cliente!))].filter(c => c != ''))
-    );
+    
+  public filtroClientes(value: string) {
+    this.input.set(value);
   }
 
   public async actualizarEquipo() {

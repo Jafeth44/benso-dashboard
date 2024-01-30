@@ -36,7 +36,21 @@
                   Cliente
                 </span>
               </div>
-              <app-autocomplete [items$]="clientes" placeholder="Cliente"/>
+              <input 
+              formControlName="cliente"
+              type="text" 
+              class="input input-bordered w-full" 
+              placeholder="Cliente"
+              [value]="input()"
+              (input)="filtroClientes(txtValue.value)"
+              [matAutocomplete]="auto"
+              #txtValue
+            />
+            <mat-autocomplete class="text-sm" autoActiveFirstOption #auto="matAutocomplete">
+              @for(item of items$ | async; track $index) {
+                <mat-option [value]="item">{{item}}</mat-option>
+              }
+            </mat-autocomplete>
             </div>
           }
           <div class="form-control w-full">

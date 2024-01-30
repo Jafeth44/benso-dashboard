@@ -43,9 +43,7 @@ export class DataService {
   }
 
   public async updateEquipo(activo: string, equipo: CrearEquipoConLocalDto) {
-    const updatedDoc = await updateDoc(doc(this.firestore, "equipos", activo), {
-      ...equipo
-    })
+    const updatedDoc = await updateDoc(doc(this.firestore, "equipos", activo), {...equipo})
     return updatedDoc;
   }
   
@@ -57,6 +55,10 @@ export class DataService {
     await uploadBytes(storageRef, file);
     const imageUrl = await getDownloadURL(storageRef);
     return imageUrl;
+  }
+
+  public async borrarImagen(imgLink: string) {
+    
   }
 
   public async crearMantenimiento(activo: string, mantenimiento: CrearMantenimientoDto) {

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { DataService } from '../../data/data.service';
@@ -7,12 +7,14 @@ import { CrearEquipoConLocalDto } from '../../data/dtos/CreateEquipoConLocal.dto
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { ToastrService } from 'ngx-toastr';
 import { AutocompleteComponent } from '../../components/autocomplete/autocomplete.component';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, combineLatest, map, tap } from 'rxjs';
 import { GetEquiposDto } from '../../data/dtos/GetEquipos.dto';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @Component({
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, CommonModule, LoaderComponent, AutocompleteComponent],
+  imports: [ReactiveFormsModule, RouterLink, CommonModule, LoaderComponent, AutocompleteComponent, MatAutocompleteModule],
   templateUrl: './nuevo-equipo-page.component.html',
   styles: `
       #table-container {
@@ -30,6 +32,10 @@ export class NuevoEquipoPageComponent implements OnInit {
   public esAdmin$ = this.dataService.isAdmin$;
   public isLoading: boolean = false;
   public isFormInvalid: boolean = false;
+
+  public items$!: Observable<string[]>;
+  public input = signal('');
+  public input$ = toObservable(this.input);
 
   public nuevoEquipoForm: FormGroup = this.formBuilder.group({
     activo: ['', Validators.required],
@@ -49,6 +55,20 @@ export class NuevoEquipoPageComponent implements OnInit {
     this.clientes = this.equipos$.pipe(
       map((equipos) => [...new Set(equipos.map(e => e.cliente!).sort())].filter(c => c != ''))
     )
+
+    this.items$ = combineLatest([
+      this.clientes,
+      this.input$
+    ]).pipe(
+      map(([items, input]) => items.filter(
+        item => item.includes(input.toUpperCase())
+      )),
+    )
+  }
+
+      
+  public filtroClientes(value: string) {
+    this.input.set(value);
   }
 
   public  resetFormStatus(): void {
