@@ -129,7 +129,7 @@
             <div class="px-2">
               @if(equipo.mantenimientos) {
                 @for(item of equipo.mantenimientos; track $index) {
-                  <div class="py-1 px-2 my-0.5 rounded-md text-xl flex justify-between cursor-pointer hover:bg-base-content hover:bg-opacity-30 hover:transition-all"><span class="font-bold text-left">{{item.fecha| date:'dd/MM/yy'}}</span>   <span class="text-right">{{item.tecnico | titlecase}}</span></div>
+                  <div [routerLink]="'/dashboard/mantenimiento/'+equipo.activo+'/'+$index" class="py-1 px-2 my-0.5 rounded-md text-xl flex justify-between cursor-pointer hover:bg-base-content hover:bg-opacity-30 hover:transition-all"><span class="font-bold text-left">{{item.fecha| date:'dd/MM/yy'}}</span>   <span class="text-right">{{item.tecnico | titlecase}}</span></div>
                 }
               } @else {
                 <h1 class="card-title justify-center">Aún no hay información</h1>

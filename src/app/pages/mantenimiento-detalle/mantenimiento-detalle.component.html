@@ -1,0 +1,245 @@
+<div id="table-container" class="shadow-2xl bg-base-300 w-full h-full flex flex-col rounded-sm md:rounded-2xl">
+  <div class="flex justify-between items-center w-full md:rounded-t-2xl bg-primary-content p-3">
+    <h1 class="text-xl p-3 card-title">
+      Detalle del Mantenimiento
+    </h1>
+    <button class="btn btn-primary btn-sm mr-3" (click)="location.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+      </svg>
+      Regresar
+    </button>
+  </div>
+  
+@if(equipo$ | async; as equipo) {
+  <!-- space-y-6 -->
+  <div class="h-full px-2 md:px-5 gap-2 text-xs md:text-base flex-1 w-full overflow-scroll">
+    <div class="flex w-full gap-2">
+      <div class="flex-1">
+        <div class="label">
+          <span class="label-text">
+            Fecha
+          </span>
+        </div>
+        <div class="text-xl w-full">{{equipo.mantenimientos![mantenimientoId].fecha | date:'dd/MM/yy'}}</div>
+      </div>
+      <div class="flex h-full gap-2 self-end">
+        <div class="">
+          <div class="label">
+            <span class="label-text">
+              Hora Inicio
+            </span>
+          </div>
+          <div class="text-xl w-full">{{equipo.mantenimientos![mantenimientoId].horaInicio}}</div>
+        </div>
+        <div class="">
+          <div class="label">
+            <span class="label-text">
+              Hora Cierre
+            </span>
+          </div>
+          <div class="text-xl w-full">{{equipo.mantenimientos![mantenimientoId].horaCierre}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-control w-full">
+      <div class="label">
+        <span class="label-text">
+          Técnico
+        </span>
+      </div>
+      <div class="text-xl w-full">{{equipo.mantenimientos![mantenimientoId].tecnico}}</div>
+    </div>
+    <div class="form-control text-xs md:text-base">
+      <div class="label">
+        <span class="label-text">
+          Materiales
+        </span>
+      </div>
+      <div class="p-3 rounded-md border input-bordered bg-base-100 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2">
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary" disabled [checked]="equipo.mantenimientos![mantenimientoId].materiales.nitrogeno">
+          &nbsp;
+          Nitrógeno
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary" disabled [checked]="equipo.mantenimientos![mantenimientoId].materiales.refrigerante">
+          &nbsp;
+          Refrigerante
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary" disabled [checked]="equipo.mantenimientos![mantenimientoId].materiales.tuberiaCobre">
+          &nbsp;
+          Tuberia de Cobre
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary" disabled [checked]="equipo.mantenimientos![mantenimientoId].materiales.soldadura">
+          &nbsp;
+          Soldadura
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary" disabled [checked]="equipo.mantenimientos![mantenimientoId].materiales.nuBrite">
+          &nbsp;
+          Nu-Brite
+        </label>
+      </div>
+    </div>
+    <div class="form-contol text-xs md:text-base" formGroupName="repuestos">
+      <div class="label">
+        <span class="label-text">
+          Repuestos
+        </span>        
+      </div>
+      <div class="p-3 rounded-md border input-bordered bg-base-100 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2">
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary" disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.capacitorArranque">
+          &nbsp;
+          Capacitor Arranque
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.capacitorPermanente">
+          &nbsp;
+          Capacitor Permanente
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.relay">
+          &nbsp;
+          Relay
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.contactor">
+          &nbsp;
+          Contactor
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.controlador">
+          &nbsp;
+          Controlador
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.sensor">
+          &nbsp;
+          Sensor
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.capilar">
+          &nbsp;
+          Capilar
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.fusibles">
+          &nbsp;
+          Fusibles
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.manillas">
+          &nbsp;
+          Manillas
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.abanicoEvaporador">
+          &nbsp;
+          Abanico Evaporador
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.abanicoAxial">
+          &nbsp;
+          Abanico Axial
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.abanicoCondensador">
+          &nbsp;
+          Abanico Condensador
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.pushBoton">
+          &nbsp;
+          Push Boton
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.tuboLedGrande">
+          &nbsp;
+          Tubo Led Grande
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.empaquePuerta">
+          &nbsp;
+          Empaque Puerta
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.compresor">
+          &nbsp;
+          Compresor
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.protectorTermico">
+          &nbsp;
+          Protector Térmico
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.tuboLedPequeno">
+          &nbsp;
+          Tubo Led Pequeño
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.interruptorLuz">
+          &nbsp;
+          Interruptor Luz
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.resistenciaDrenaje">
+          &nbsp;
+          Resistencia Drenaje
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.resistenciaEvaporador">
+          &nbsp;
+          Resistencia Evaporador
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.valvulaCarga">
+          &nbsp;
+          Valvula Carga
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.filtroDeshidratador">
+          &nbsp;
+          Filtro Deshidratador
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.resistenciaPuerta">
+          &nbsp;
+          Resistencia Puerta
+        </label>
+        <label class="flex w-full items-center px-3">
+          <input type="checkbox" class="checkbox checkbox-primary"  disabled [checked]="equipo.mantenimientos![mantenimientoId].repuestos.vidrioPuertas">
+          &nbsp;
+          Vidrio Puertas
+        </label>
+      </div>
+    </div>
+    <div class="flex flex-col gap-4">
+      <div class="form-control w-full">
+        <div class="label">
+          <span class="label-text">
+            Detalle del mantenimiento
+          </span>
+        </div>
+        <div type="text" formControlName="detalle" placeholder="Detalle" class="textarea textarea-bordered w-full">{{equipo.mantenimientos![mantenimientoId].detalle || 'Vacío'}}</div>
+      </div>
+      <div class="form-control w-full">
+        <div class="label">
+          <span class="label-text">
+            Observaciones
+          </span>
+        </div>
+        <div type="text" formControlName="observaciones" placeholder="Observaciones" class="textarea textarea-bordered w-full">{{equipo.mantenimientos![mantenimientoId].observaciones || 'Vacío'}}</div>
+      </div>
+    </div>
+  </div>
+}
+</div>
+<!-- loader -->
+@if (isLoading) {
+  <app-loader />
+}

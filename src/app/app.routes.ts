@@ -42,13 +42,17 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/mantenimiento-formulario-page/mantenimiento-formulario-page.component').then(c => c.MantenimientoFormularioPageComponent),
       },
       {
+        path: 'mantenimiento/:id/:mantenimientoId',
+        loadComponent: () => import('./pages/mantenimiento-detalle/mantenimiento-detalle.component').then(c => c.MantenimientoDetalleComponent)
+      },
+      {
         path: 'settings',
         loadComponent: () => import('./pages/settings-page/settings-page.component').then(c => c.SettingsPageComponent)
       },
-      {
-        path: '**',
-        redirectTo: '',
-      },
+      // {
+      //   path: '**',
+      //   redirectTo: '',
+      // },
     ]
   },
   {
