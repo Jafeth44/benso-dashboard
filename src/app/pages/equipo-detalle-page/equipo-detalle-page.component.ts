@@ -55,12 +55,22 @@ export class EquipoDetallePageComponent {
           this.toastr.success("Foto actualizada correctamente");
         }else if(!fotoUpload) {
           this.isLoading = false;
-          this.toastr.error("No se ha podido actualizar la foto1");
+          this.toastr.error("No se ha podido actualizar la foto");
         }
       }
     } else if(!fotoRef) {
-      this.toastr.error("No se ha podido actualizar la foto2");
-      this.isLoading = false;
+      const fotoUpload = await this.dataService.subirImagen(input);
+      if(fotoUpload) {
+        await updateDoc(doc(this.firestore, "equipos", this.route), {
+          fotoRef: fotoUpload[0],
+          foto: fotoUpload[1]
+        })
+        this.isLoading = false;
+        this.toastr.success("Foto actualizada correctamente");
+      }else if(!fotoUpload) {
+        this.isLoading = false;
+        this.toastr.error("No se ha podido actualizar la foto");
+      }
     }
   }
 }
