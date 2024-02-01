@@ -74,7 +74,6 @@ export class NuevoEquipoPageComponent implements OnInit {
 
   public async createNewEquipo(input: HTMLInputElement) {
     this.isLoading = true;
-    this.nuevoEquipoForm.markAsDirty();
     if (this.nuevoEquipoForm.invalid) {
       this.toastr.warning('Por favor revisa los datos');
       this.isLoading = false;
