@@ -33,6 +33,7 @@ export class EquipoDetallePageComponent {
   public route: string;
   public sortBy = sortByProperty;
   public isLoading = false;
+  public navigator = window.navigator;
 
   constructor() {
     this.route = this.activatedRoute.snapshot.params['id'];
@@ -72,5 +73,14 @@ export class EquipoDetallePageComponent {
         this.toastr.error("No se ha podido actualizar la foto");
       }
     }
+  }
+
+  public share() {
+    const compartirEquipo: ShareData = {
+      title: "Equipos Benso",
+      text: "Información del activo "+this.route,
+      url: window.location.href
+    }
+    this.navigator.share(compartirEquipo);
   }
 }
