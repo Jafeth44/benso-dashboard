@@ -27,11 +27,10 @@ export class NuevoEquipoPageComponent implements OnInit {
   private toastr = inject(ToastrService);
   private router = inject(Router);
 
-  public equipos$: Observable<GetEquiposDto[]> = this.dataService.equipos$;
-  public clientes!: Observable<string[]>;
   public esAdmin$ = this.dataService.isAdmin$;
+  public equipos$ = this.dataService.equipos$;
+  public clientes!: Observable<string[]>;
   public isLoading: boolean = false;
-  public isFormInvalid: boolean = false;
 
   public items$!: Observable<string[]>;
   public input = signal('');
@@ -52,10 +51,12 @@ export class NuevoEquipoPageComponent implements OnInit {
   })
 
   public ngOnInit(): void {
+    //?  esto es para mostrar una lista de clientes unicos en un autocompletar
     this.clientes = this.equipos$.pipe(
       map((equipos) => [...new Set(equipos.map(e => e.cliente!).sort())].filter(c => c != ''))
     )
 
+    //? filtra la lista de clientes unicos en base a un input
     this.items$ = combineLatest([
       this.clientes,
       this.input$
@@ -66,20 +67,15 @@ export class NuevoEquipoPageComponent implements OnInit {
     )
   }
 
-      
+  //? método que envia los datos a la señal del input    
   public filtroClientes(value: string) {
     this.input.set(value);
-  }
-
-  public  resetFormStatus(): void {
-    this.isFormInvalid = false;
   }
 
   public async createNewEquipo(input: HTMLInputElement) {
     this.isLoading = true;
     this.nuevoEquipoForm.markAsDirty();
     if (this.nuevoEquipoForm.invalid) {
-      this.isFormInvalid = true;
       this.toastr.warning('Por favor revisa los datos');
       this.isLoading = false;
       return;
@@ -99,15 +95,19 @@ export class NuevoEquipoPageComponent implements OnInit {
     }
     try {
       const fotoUpload = await this.dataService.subirImagen(input);
-      nuevoEquipo.foto = fotoUpload || "";
+      if(fotoUpload) {
+        nuevoEquipo.fotoRef = fotoUpload[0];
+        nuevoEquipo.foto = fotoUpload[1];
+      } else if(!fotoUpload) {
+        nuevoEquipo.fotoRef = '';
+        nuevoEquipo.foto = '';
+      }
       await this.dataService.crearEquipo(nuevoEquipo);
       this.isLoading = false;
       this.toastr.success('Se ha creado correctamente','Guardado');
       this.router.navigateByUrl('/dashboard/equipos');
     } catch (error) {
-      console.log(error);
       this.isLoading = false;
-      this.isFormInvalid = true;
       this.toastr.error('Se ha producido un error inesperado');
       return;
     }

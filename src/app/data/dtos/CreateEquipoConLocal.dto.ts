@@ -12,6 +12,7 @@ export class CrearEquipoConLocalDto implements Equipo, Local {
   public encargado?: string;
   public fechaDeEntrega?: Date;
   public ubicacion?: string | undefined;
+  public fotoRef?: string | undefined;
   public foto?: string | undefined;
   public proximoMantenimiento?: string | undefined;
   constructor(
@@ -25,6 +26,7 @@ export class CrearEquipoConLocalDto implements Equipo, Local {
     encargado: string,
     fechaDeEntrega: Date,
     ubicacion?: string | undefined,
+    fotoRef?: string | undefined,
     foto?: string | undefined,
     proximoMantenimiento?: string | undefined
   ) {
@@ -38,6 +40,7 @@ export class CrearEquipoConLocalDto implements Equipo, Local {
     this.encargado = encargado;
     this.fechaDeEntrega = fechaDeEntrega;
     this.ubicacion = ubicacion;
+    this.fotoRef = fotoRef;
     this.foto = foto;
     this.proximoMantenimiento = proximoMantenimiento
   }

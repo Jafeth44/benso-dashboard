@@ -3,14 +3,15 @@ import { LoaderComponent } from '../../components/loader/loader.component';
 import { CommonModule, Location } from '@angular/common';
 import { DataService } from '../../data/data.service';
 import { Firestore, doc, docData } from '@angular/fire/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { GetEquiposDto } from '../../data/dtos/GetEquipos.dto';
 import { Observable } from 'rxjs';
 import { sortByProperty } from 'sort-by-property';
+import { CustomTimePipe } from '../../pipes/customTime.pipe';
 
 @Component({
   standalone: true,
-  imports: [LoaderComponent, CommonModule],
+  imports: [LoaderComponent, CommonModule, CustomTimePipe, RouterLink],
   templateUrl: './mantenimiento-detalle.component.html',
   styles: ``
 })

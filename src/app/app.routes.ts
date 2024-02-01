@@ -46,13 +46,17 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/mantenimiento-detalle/mantenimiento-detalle.component').then(c => c.MantenimientoDetalleComponent)
       },
       {
+        path: 'mantenimiento/:id/:mantenimientoId/editar',
+        loadComponent: () => import('./pages/editar-mantenimiento/editar-mantenimiento.component').then(c => c.EditarMantenimientoComponent)
+      },
+      {
         path: 'settings',
         loadComponent: () => import('./pages/settings-page/settings-page.component').then(c => c.SettingsPageComponent)
       },
-      // {
-      //   path: '**',
-      //   redirectTo: '',
-      // },
+      {
+        path: '**',
+        redirectTo: '',
+      },
     ]
   },
   {

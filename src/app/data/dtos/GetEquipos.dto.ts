@@ -13,6 +13,7 @@ export class GetEquiposDto implements Equipo, Local {
   public encargado?: string;
   public fechaDeEntrega?: Date;
   public ubicacion?: string | undefined;
+  public fotoRef?: string | undefined;
   public foto?: string | undefined;
   public mantenimientos?: Mantenimiento[];
   public proximoMantenimiento?: Date;
@@ -28,6 +29,7 @@ export class GetEquiposDto implements Equipo, Local {
     fechaDeEntrega: Date,
     proximoMantenimiento: Date,
     ubicacion?: string | undefined,
+    fotoRef?: string | undefined,
     foto?: string | undefined,
     mantenimientos?: Mantenimiento[],
   ) {
@@ -41,6 +43,7 @@ export class GetEquiposDto implements Equipo, Local {
     this.encargado = encargado;
     this.fechaDeEntrega = fechaDeEntrega;
     this.ubicacion = ubicacion;
+    this.fotoRef = fotoRef;
     this.foto = foto;
     this.mantenimientos = mantenimientos;
     this.proximoMantenimiento = proximoMantenimiento;

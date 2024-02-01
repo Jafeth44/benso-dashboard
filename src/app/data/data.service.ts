@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Firestore, arrayUnion, collection, collectionData, doc, setDoc, updateDoc } from '@angular/fire/firestore';
 import { Observable, catchError, combineLatest, first, map, of, take, tap } from 'rxjs';
 import { CrearEquipoConLocalDto } from './dtos/CreateEquipoConLocal.dto';
-import { Storage, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
+import { Storage, deleteObject, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
 import { GetEquiposDto } from './dtos/GetEquipos.dto';
 import { CrearMantenimientoDto } from './dtos/CrearMantenimiento.dto';
 import { AuthService } from '../auth/auth.service';
@@ -47,18 +47,23 @@ export class DataService {
     return updatedDoc;
   }
   
-  public async subirImagen(input: HTMLInputElement): Promise<string | undefined> {
+  public async subirImagen(input: HTMLInputElement): Promise<string[] | undefined> {
     if (!input.files?.item(0)) return undefined;
   
     const file = input.files[0];
     const storageRef = ref(this.storage, file.name);
     await uploadBytes(storageRef, file);
     const imageUrl = await getDownloadURL(storageRef);
-    return imageUrl;
+    return [file.name, imageUrl];
   }
 
-  public async borrarImagen(imgLink: string) {
-    
+  public async borrarImagen(fotoRef: string) {
+    try {
+      await deleteObject(ref(this.storage, fotoRef));
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 
   public async crearMantenimiento(activo: string, mantenimiento: CrearMantenimientoDto) {

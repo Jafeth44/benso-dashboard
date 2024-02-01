@@ -7,6 +7,7 @@ export class Local {
   public encargado?: string;
   public fechaDeEntrega?: Date;
   public ubicacion?: string;
+  public fotoRef?: string;
   public foto?: string;
   constructor(
     id: string | undefined,
@@ -17,6 +18,7 @@ export class Local {
     encargado: string,
     fechaDeEntrega: Date,
     ubicacion?: string,
+    fotoRef?: string,
     foto?: string
   ) {
     this.id = id;
@@ -27,6 +29,7 @@ export class Local {
     this.encargado = encargado;
     this.fechaDeEntrega = fechaDeEntrega;
     this.ubicacion = ubicacion;
+    this.fotoRef = fotoRef;
     this.foto = foto;
   }
 }
