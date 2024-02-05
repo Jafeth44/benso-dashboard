@@ -39,8 +39,7 @@ export class DataService {
 
   public async crearEquipo(equipo: CrearEquipoConLocalDto) {
     const nuevoEquipo = Object.fromEntries(Object.entries(equipo).filter(([key, value]) => value != ""));
-    const newDoc = await setDoc(doc(this.firestore, "equipos", equipo.activo.toString()), {...nuevoEquipo}, {merge: true});
-    return newDoc;
+    await setDoc(doc(this.firestore, "equipos", equipo.activo.toString()), {...nuevoEquipo}, {merge: true});
   }
 
   public async updateEquipo(activo: string, equipo: CrearEquipoConLocalDto) {

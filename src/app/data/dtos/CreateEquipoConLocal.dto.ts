@@ -10,7 +10,7 @@ export class CrearEquipoConLocalDto implements Equipo, Local {
   public telefono?: string;
   public direccion?: string;
   public encargado?: string;
-  public fechaDeEntrega?: Date;
+  public fechaDeEntrega?: Date | string;
   public ubicacion?: string | undefined;
   public fotoRef?: string | undefined;
   public foto?: string | undefined;

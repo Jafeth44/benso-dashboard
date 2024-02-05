@@ -11,7 +11,9 @@
     </button>
   </div>
   <!-- space-y-6 -->
-  <form class="h-full px-2 md:px-5 gap-2 text-xs md:text-base teflex-1 w-full overflow-scroll" [formGroup]="nuevoMantenimientoForm" (ngSubmit)="crearNuevoMantenimiento()">
+  
+  @if(user$ | async; as user) {
+  <form class="h-full px-2 md:px-5 gap-2 text-xs md:text-base teflex-1 w-full overflow-scroll" [formGroup]="nuevoMantenimientoForm" (ngSubmit)="crearNuevoMantenimiento(user.displayName)">
     <div class="flex w-full gap-2">
       <div class="flex-1">
         <div class="label">
@@ -46,7 +48,11 @@
           Técnico
         </span>
       </div>
-      <input type="text" formControlName="tecnico" placeholder="Nombre del Técnico" class="input input-bordered w-full"/>
+      @if(!user.displayName) {
+        <input type="text" formControlName="tecnico" placeholder="Nombre del Técnico" class="input input-bordered w-full"/>
+      } @else {
+        <div class="text0 w-full" #txtValue>{{user.displayName}}</div>
+      }
     </div>
     <div class="form-control text-xs md:text-base" formGroupName="materiales" >
       <div class="label">
@@ -243,6 +249,7 @@
       </button>
     </div>
   </form>
+  } 
 </div>
 <!-- loader -->
 @if (isLoading) {

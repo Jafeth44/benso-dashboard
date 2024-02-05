@@ -33,7 +33,7 @@
           @for(item of equipos; track $index) {
           <tr [routerLink]="item.activo.toString()"  [classList]="$odd ? 'bg-base-100 cursor-pointer hover:bg-base-content hover:bg-opacity-30 hover:transition-all' : 'bg-base-200 cursor-pointer hover:bg-base-content hover:bg-opacity-30 hover:transition-all'" >
             <td><div class="badge badge-accent">{{ item.activo }}</div></td>
-            <td class="hidden md:table-cell">{{(item.fechaDeEntrega| date:'MM/dd/YY') || '--/--/--'}}</td>
+            <td class="hidden md:table-cell">{{(item.fechaDeEntrega| date:'dd/MM/yy') || '--/--/--'}}</td>
             <td class="hidden md:table-cell">{{ item.modelo }}</td>
             <td class="hidden md:table-cell">{{ item.serie }}</td>
             <td class="max-w-40">{{ (item.direccion | titlecase) || '------' }}</td>

@@ -9,13 +9,13 @@
     <!-- aqui comienza la tabla -->
     @if(equipos$ | async; as equipos) {
       <table class="table table-sm table-pin-rows">
-        @for(item of equipos.sort(sortBy('proximoMantenimiento', 'asc')); track $index) {
+        @for(item of equipos; track $index) {
         <!-- head -->
         <thead>
           <tr class="bg-primary-content md:text-lg">
             <th class="text-left"><span class="cursor-pointer hover:bg-accent hover:bg-opacity-40 p-1 rounded-lg transition-all" [routerLink]="'/dashboard/equipos/'+item.activo">Activo <div class="badge badge-accent md:badge-lg">{{item.activo}}</div></span>   Revisiones <div class="badge badge-neutral md:badge-lg">{{item.mantenimientos?.length || '0'}}</div></th>
             @if(item.proximoMantenimiento){
-              <th class="text-right">Próximo <div class="badge badge-neutral md:badge-lg">{{item.proximoMantenimiento | date:'dd/MM/yy'}}</div></th>
+              <th class="text-right">Próximo <div [routerLink]="'/dashboard/equipos/'+item.activo" class="badge badge-neutral md:badge-lg">{{item.proximoMantenimiento | date:'dd/MM/yy'}}</div></th>
             }@else {
               <th class="text-right">Próximo <button [routerLink]="'/dashboard/equipos/'+item.activo" class="badge badge-neutral md:badge-lg hover:bg-success hover:text-black cursor-pointer">Nuevo</button></th>
             }

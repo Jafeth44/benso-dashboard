@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../data/data.service';
 import { ActivatedRoute } from '@angular/router';
 import { CrearMantenimientoDto } from '../../data/dtos/CrearMantenimiento.dto';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   standalone: true,
@@ -19,9 +20,11 @@ import { CrearMantenimientoDto } from '../../data/dtos/CrearMantenimiento.dto';
 })
 export class MantenimientoFormularioPageComponent {
   private activatedRoute = inject(ActivatedRoute);
+  private authService = inject(AuthService);
   private formBuilder = inject(FormBuilder);
   private dataService = inject(DataService);
   private toastr = inject(ToastrService);
+  public user$ = this.authService.authState$;
   public isLoading: boolean = false;
   public location = inject(Location);
 
@@ -70,7 +73,7 @@ export class MantenimientoFormularioPageComponent {
 
   //todo resetear valor invalid de cada formControl
 
-  public async crearNuevoMantenimiento() {
+  public async crearNuevoMantenimiento(userName: string | null) {
     this.isLoading = true;
     if (this.nuevoMantenimientoForm.invalid) {
       this.toastr.warning('Por favor revisa los datos');
@@ -81,7 +84,7 @@ export class MantenimientoFormularioPageComponent {
       fecha: this.nuevoMantenimientoForm.value.fecha,
       horaInicio: this.nuevoMantenimientoForm.value.horaInicio,
       horaCierre: this.nuevoMantenimientoForm.value.horaCierre,
-      tecnico: this.nuevoMantenimientoForm.value.tecnico,
+      tecnico: userName ? userName :this.nuevoMantenimientoForm.value.tecnico,
       detalle: this.nuevoMantenimientoForm.value.detalle,
       observaciones: this.nuevoMantenimientoForm.value.observaciones,
       materiales: this.nuevoMantenimientoForm.value.materiales,

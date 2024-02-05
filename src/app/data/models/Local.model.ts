@@ -5,7 +5,7 @@ export class Local {
   public telefono?: string;
   public direccion?: string;
   public encargado?: string;
-  public fechaDeEntrega?: Date;
+  public fechaDeEntrega?: Date | string;
   public ubicacion?: string;
   public fotoRef?: string;
   public foto?: string;

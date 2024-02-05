@@ -13,6 +13,11 @@ export const routes: Routes = [
         path: '',
         loadComponent: () => import('./pages/home-page/home-page.component').then(c => c.HomePageComponent),
       },
+      //temporal
+      {
+        path: 'subir',
+        loadComponent: () => import('./pages/subir-equipos/subir-equipos.component').then(c => c.SubirEquiposComponent),
+      },
       {
         path: 'clients',
         loadComponent: () => import('./pages/clients-page/clients-page.component').then(c => c.ClientsPageComponent),
