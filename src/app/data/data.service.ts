@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, arrayUnion, collection, collectionData, doc, setDoc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, arrayRemove, arrayUnion, collection, collectionData, doc, setDoc, updateDoc } from '@angular/fire/firestore';
 import { Observable, catchError, combineLatest, first, map, of, take, tap } from 'rxjs';
 import { CrearEquipoConLocalDto } from './dtos/CreateEquipoConLocal.dto';
 import { Storage, deleteObject, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
@@ -69,6 +69,13 @@ export class DataService {
   public async crearMantenimiento(activo: string, mantenimiento: CrearMantenimientoDto) {
     const updatedDoc = await updateDoc(doc(this.firestore, "equipos", activo), {
       mantenimientos: arrayUnion(mantenimiento)
+    })
+    return updatedDoc;
+  }
+
+  public async borrarMantenimiento(activo: string, mantenimiento: CrearMantenimientoDto) {
+    const updatedDoc = await updateDoc(doc(this.firestore, "equipos", activo), {
+      mantenimientos: arrayRemove(mantenimiento)
     })
     return updatedDoc;
   }

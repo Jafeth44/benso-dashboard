@@ -112,7 +112,6 @@
                 <div class="text-xl flex justify-between"><span class="font-bold text-left">Serie</span>              <span class="text-right">{{equipo.serie}}</span></div>
                 <div class="text-xl flex justify-between"><span class="font-bold text-left">Fecha de entrega</span>   <span class="text-right">{{equipo.fechaDeEntrega | date:'dd/MM/yy'}}</span></div>
                 @if(equipo.mantenimientos) {
-
                   <div class="text-xl flex justify-between"><span class="font-bold text-left">Mantenimiento</span>      <span class="text-right">{{equipo.mantenimientos.length || '0'}} {{equipo.mantenimientos.length == 1 ? 'vez':'veces'}}</span></div> <!--? sé que hay un código más facil para esto, pero no me acuerdo en este momento-->
                   <div class="text-xl flex justify-between"><span class="font-bold text-left">Ultima revisión</span>    <span class="text-right">{{equipo.mantenimientos.sort(sortBy('fecha', 'desc'))[0].fecha | date:'dd/MM/yy'}}</span></div>
                 } @else {

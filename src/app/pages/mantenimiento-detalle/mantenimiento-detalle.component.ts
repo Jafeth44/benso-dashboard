@@ -8,6 +8,7 @@ import { GetEquiposDto } from '../../data/dtos/GetEquipos.dto';
 import { Observable } from 'rxjs';
 import { sortByProperty } from 'sort-by-property';
 import { CustomTimePipe } from '../../pipes/customTime.pipe';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   standalone: true,
@@ -19,6 +20,7 @@ export class MantenimientoDetalleComponent {
   private dataService = inject(DataService);
   private activatedRoute = inject(ActivatedRoute);
   private firestore = inject(Firestore);
+  private toastr = inject(ToastrService);
   public equipo$: Observable<GetEquiposDto>;
   public location = inject(Location);
   public route: string;
@@ -33,4 +35,10 @@ export class MantenimientoDetalleComponent {
   }
 
   public isLoading: boolean = false;
+
+  public deleteMantenimiento(equipo: GetEquiposDto): void {
+    this.dataService.borrarMantenimiento(this.route, equipo.mantenimientos![this.mantenimientoId]);
+    this.location.back();
+    this.toastr.info("Mantenimiento borrado");
+  }
 }
