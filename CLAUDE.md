@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Stack
 
-Angular 18 (standalone components, no NgModules, `loadComponent` lazy routes), TypeScript 5.4 strict mode, Tailwind CSS + DaisyUI + Angular Material, Chart.js/ng2-charts. Backend is Firebase (`@angular/fire`) used purely client-side — Auth, Firestore, Storage, Analytics, App Check — no Cloud Functions. Firebase project: `equipos-benso`. App locale is hardcoded to `es-CR`; UI copy, routes, and domain terms (equipos, mantenimiento, clientes) are in Spanish.
+Angular 20 (standalone components, no NgModules, `loadComponent` lazy routes), TypeScript 5.8 strict mode, Tailwind CSS + DaisyUI + Angular Material, Chart.js/ng2-charts. Backend is Firebase (`@angular/fire`) used purely client-side — Auth, Firestore, Storage, Analytics, App Check — no Cloud Functions. Firebase project: `equipos-benso`. App locale is hardcoded to `es-CR`; UI copy, routes, and domain terms (equipos, mantenimiento, clientes) are in Spanish.
+
+`@angular/fire` is community-maintained and lags Angular's release cadence — it currently caps this app at Angular 20 (its latest stable release); check `npm view @angular/fire dist-tags` before attempting a further major bump.
 
 ## Commands
 
