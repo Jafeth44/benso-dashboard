@@ -24,7 +24,23 @@ No format command is configured (no Prettier) — follow `.editorconfig` (2-spac
 
 ## Environment setup gotcha
 
-`src/environments/` is gitignored and ships empty — a fresh clone will not build or run until `environment.ts` and `environment.development.ts` are created manually with the Firebase config object (`environment.config`, consumed in `src/app/app.config.ts`). There is no template file in the repo; get the config values from the project owner.
+`src/environments/` is gitignored and ships empty — a fresh clone will not build or run until `environment.ts` and `environment.development.ts` are created manually. There is no template file in the repo; get the config values from the project owner. Each file exports:
+
+```ts
+export const environment = {
+  production: false, // true in environment.ts
+  useEmulators: true, // false in environment.ts
+  config: { /* Firebase web app config object */ },
+};
+```
+
+## Local dev environment (Firebase emulators)
+
+`environment.development.ts` sets `useEmulators: true`, which makes `app.config.ts` connect Auth/Firestore/Storage to the local Firebase Emulator Suite instead of the live `equipos-benso` project — so `bun run start` never touches production data.
+
+- `bun x firebase-tools emulators:start --only auth,firestore,storage` — starts the emulators (ports: auth 9099, firestore 8080, storage 9199); emulator UI at http://localhost:4000
+- Run it alongside `bun run start`. Firestore/Storage rules are loaded from the local `firestore.rules`/`storage.rules` files, so rule changes can be tested here before touching production.
+- To point the app at production instead, set `useEmulators: false` in `environment.development.ts`.
 
 ## Firestore security
 
