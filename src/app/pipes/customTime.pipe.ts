@@ -6,7 +6,7 @@ import moment from 'moment';
   standalone: true
 })
 export class CustomTimePipe implements PipeTransform {
-  transform(value: any, args?: any): any {
+  transform(value: Date): string {
     return moment(value,'HH:mm').format("h:mm A");
   }
 }

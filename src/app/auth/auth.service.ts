@@ -1,4 +1,4 @@
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import {
   Auth,
@@ -6,8 +6,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  updatePassword,
-  user,
 } from '@angular/fire/auth';
 import {
   setPersistence,
@@ -17,11 +15,11 @@ import {
 } from 'firebase/auth';
 import { ToastrService } from 'ngx-toastr';
 
-export type Credentials = {
+export interface Credentials {
   account: string;
   password: string;
   displayName?: string;
-};
+}
 
 const emailProvider = '@equiposbenso.com';
 

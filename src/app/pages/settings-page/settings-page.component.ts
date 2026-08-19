@@ -20,7 +20,7 @@ export class SettingsPageComponent {
   public isAdmin$ = this.dataService.isAdmin$;
   public user$ = this.authService.authState$;
   public location = inject(Location);
-  public isLoading: boolean = false;
+  public isLoading = false;
 
   public nuevoUsuarioForm = this.formBuilder.group({
     account: ['', Validators.required],
@@ -42,7 +42,7 @@ export class SettingsPageComponent {
       this.isLoading = false;
       this.toast.success('Cambio de nombre exitoso');
       return;
-    } catch (error) {
+    } catch {
       this.isLoading = false;
       this.toast.error('Ocurrió un error inesperado');
       return;
@@ -74,7 +74,7 @@ export class SettingsPageComponent {
       this.isLoading = false;
       this.toast.success('Ha cambiado la contraseña correctamente');
       return;
-    } catch (error) {
+    } catch {
       this.isLoading = false;
       this.toast.error('Ocurrió un error inesperado');
       return;

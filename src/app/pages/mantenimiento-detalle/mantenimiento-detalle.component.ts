@@ -33,7 +33,7 @@ export class MantenimientoDetalleComponent {
     this.equipo$ = docData(aDoc) as Observable<GetEquiposDto>;
   }
 
-  public isLoading: boolean = false;
+  public isLoading = false;
 
   public deleteMantenimiento(equipo: GetEquiposDto): void {
     this.dataService.borrarMantenimiento(this.route, equipo.mantenimientos![this.mantenimientoId]);

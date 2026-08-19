@@ -5,13 +5,13 @@
       <h5 class="card-title">Iniciar Sesión</h5>
       <div class="form-control">
           <div class="label">
-              <label class="label-text">Usuario</label>
+              <label for="email" class="label-text">Usuario</label>
             </div>
             <input type="email" formControlName="email" id="email" class="input input-bordered" [ngClass]="{'input-error': isFormInvalid}" placeholder="nombre.benso" (focus)="resetFormStatus()">
       </div>
       <div class="form-control">
         <div class="label">
-            <label class="label-text">Contraseña</label>
+            <label for="password" class="label-text">Contraseña</label>
         </div>
           <input type="password" formControlName="password" id="password" placeholder="••••••••" class="input input-bordered" [ngClass]="{'input-error': isFormInvalid}" (focus)="resetFormStatus()">
       </div>

@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Firestore, arrayRemove, arrayUnion, collection, collectionData, doc, setDoc, updateDoc } from '@angular/fire/firestore';
-import { Observable, catchError, combineLatest, first, map, of, take, tap } from 'rxjs';
+import { Observable, combineLatest, map } from 'rxjs';
 import { CrearEquipoConLocalDto } from './dtos/CreateEquipoConLocal.dto';
 import { Storage, deleteObject, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
 import { GetEquiposDto } from './dtos/GetEquipos.dto';
@@ -26,8 +26,8 @@ export class DataService {
   constructor() {
     const aCollection = collection(this.firestore, "equipos");
     const bCollection = collection(this.firestore, "administradores");
-    this.equipos$ = collectionData(aCollection) as Observable<any[]>;
-    this.administradores$ = collectionData(bCollection) as Observable<any[]>;
+    this.equipos$ = collectionData(aCollection) as Observable<GetEquiposDto[]>;
+    this.administradores$ = collectionData(bCollection) as Observable<Administradores[]>;
     this.isAdmin$ = combineLatest([
       this.AuthService.authState$,
       this.administradores$
@@ -38,7 +38,7 @@ export class DataService {
   }
 
   public async crearEquipo(equipo: CrearEquipoConLocalDto) {
-    const nuevoEquipo = Object.fromEntries(Object.entries(equipo).filter(([key, value]) => value != ""));
+    const nuevoEquipo = Object.fromEntries(Object.entries(equipo).filter(([, value]) => value != ""));
     await setDoc(doc(this.firestore, "equipos", equipo.activo.toString()), {...nuevoEquipo}, {merge: true});
   }
 
@@ -61,7 +61,7 @@ export class DataService {
     try {
       await deleteObject(ref(this.storage, fotoRef));
       return true;
-    } catch (error) {
+    } catch {
       return false;
     }
   }

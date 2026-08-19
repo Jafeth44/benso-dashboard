@@ -1,4 +1,4 @@
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService, Credentials } from '../../auth.service';
@@ -17,7 +17,7 @@ export class LoginPageComponent {
   private authService = inject(AuthService);
   private toastr      = inject(ToastrService);
   private router      = inject(Router);
-  public isFormInvalid: boolean = false;
+  public isFormInvalid = false;
 
   public form = this.formBuilder.group(
     {
@@ -46,9 +46,9 @@ export class LoginPageComponent {
       await this.authService.loginWithEmail(credentials, this.form.value.persistanse!);
       this.router.navigateByUrl('/');
       this.toastr.success("Sesión iniciada");
-    } catch (error) {
+    } catch {
       this.isFormInvalid = true;
       return;
-    } 
+    }
   }
 }
