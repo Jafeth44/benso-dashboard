@@ -6,10 +6,9 @@ import { CommonModule } from '@angular/common';
 import { DataService } from '../../data/data.service';
 
 @Component({
-  standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule],
-  templateUrl: './dashboard-layout.component.html',
-  styles: ''
+    imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule],
+    templateUrl: './dashboard-layout.component.html',
+    styles: ''
 })
 export class DashboardLayoutComponent {
   public authService = inject(AuthService);

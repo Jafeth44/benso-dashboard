@@ -8,10 +8,9 @@ import { DataService } from '../../data/data.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-  standalone: true,
-  imports: [LoaderComponent, CommonModule, ReactiveFormsModule],
-  templateUrl: './settings-page.component.html',
-  styles: ``
+    imports: [LoaderComponent, CommonModule, ReactiveFormsModule],
+    templateUrl: './settings-page.component.html',
+    styles: ``
 })
 export class SettingsPageComponent {
   private readonly authService = inject(AuthService);

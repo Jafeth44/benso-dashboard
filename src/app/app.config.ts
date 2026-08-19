@@ -31,6 +31,5 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideToastr({ closeButton: true, timeOut: 2500, progressBar: true }),
     { provide: LOCALE_ID, useValue: 'es-CR' },
-    provideAnimations()
   ],
 };

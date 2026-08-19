@@ -4,11 +4,10 @@ import { LoaderComponent } from '../loader/loader.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-agendar-mantenimieto',
-  standalone: true,
-  imports: [LoaderComponent, CommonModule],
-  templateUrl: './agendar-mantenimieto.component.html',
-  styles: ``
+    selector: 'app-agendar-mantenimieto',
+    imports: [LoaderComponent, CommonModule],
+    templateUrl: './agendar-mantenimieto.component.html',
+    styles: ``
 })
 export class AgendarMantenimientoComponent {
   private fireStore = inject(Firestore);

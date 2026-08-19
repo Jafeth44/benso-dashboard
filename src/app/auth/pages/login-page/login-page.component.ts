@@ -7,11 +7,10 @@ import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
-  selector: 'app-login-page',
-  standalone: true,
-  imports: [RouterLink, ReactiveFormsModule, CommonModule],
-  templateUrl: './login-page.component.html',
-  styles: ``,
+    selector: 'app-login-page',
+    imports: [RouterLink, ReactiveFormsModule, CommonModule],
+    templateUrl: './login-page.component.html',
+    styles: ``
 })
 export class LoginPageComponent {
   private formBuilder = inject(FormBuilder);

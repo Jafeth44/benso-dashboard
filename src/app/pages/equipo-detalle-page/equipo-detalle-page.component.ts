@@ -14,10 +14,9 @@ import { DataService } from '../../data/data.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  standalone: true,
-  imports: [RouterLink, CommonModule, LoaderComponent, AgendarMantenimientoComponent],
-  templateUrl: './equipo-detalle-page.component.html',
-  styles: /*css*/`
+    imports: [RouterLink, CommonModule, LoaderComponent, AgendarMantenimientoComponent],
+    templateUrl: './equipo-detalle-page.component.html',
+    styles: /*css*/ `
     #table-container {
       container-type: size;
     }

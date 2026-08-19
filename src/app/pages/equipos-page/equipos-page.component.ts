@@ -7,14 +7,13 @@ import { GetEquiposDto } from '../../data/dtos/GetEquipos.dto';
 import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterLink],
-  templateUrl: './equipos-page.component.html',
-  styles: /*css*/`
+    imports: [CommonModule, RouterLink],
+    templateUrl: './equipos-page.component.html',
+    styles: /*css*/ `
   #table-container {
     container-type: size;
   }
-  `,
+  `
 })
 export class EquiposPageComponent implements OnInit {
   private dataService = inject(DataService);

@@ -13,13 +13,12 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
-  standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, CommonModule, LoaderComponent, AutocompleteComponent, MatAutocompleteModule],
-  templateUrl: './editar-equipo-page.component.html',
-  styles: `
+    imports: [ReactiveFormsModule, RouterLink, CommonModule, LoaderComponent, AutocompleteComponent, MatAutocompleteModule],
+    templateUrl: './editar-equipo-page.component.html',
+    styles: `
       #table-container {
       container-type: size;
-    }`,
+    }`
 })
 export class EditarEquipoPageComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
