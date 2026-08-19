@@ -6,11 +6,10 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-autocomplete',
-  standalone: true,
-  imports: [CommonModule, MatAutocompleteModule, ReactiveFormsModule],
-  templateUrl: './autocomplete.component.html',
-  styles: ``
+    selector: 'app-autocomplete',
+    imports: [CommonModule, MatAutocompleteModule, ReactiveFormsModule],
+    templateUrl: './autocomplete.component.html',
+    styles: ``
 })
 export class AutocompleteComponent implements OnInit {
   @Input({required: true})

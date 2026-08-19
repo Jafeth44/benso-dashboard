@@ -11,14 +11,13 @@ import { ToastrService } from 'ngx-toastr';
 import { sortByProperty } from 'sort-by-property';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterLink, AgendarMantenimientoComponent],
-  templateUrl: './mantenimiento-page.component.html',
-  styles: /*css*/`
+    imports: [CommonModule, RouterLink, AgendarMantenimientoComponent],
+    templateUrl: './mantenimiento-page.component.html',
+    styles: /*css*/ `
   #table-container {
     container-type: size;
   }
-  `,
+  `
 })
 export class MantenimientoPageComponent implements OnInit {
   private dataService = inject(DataService);

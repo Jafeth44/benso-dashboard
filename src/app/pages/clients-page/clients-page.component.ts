@@ -8,14 +8,13 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { sortByProperty } from 'sort-by-property';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterLink],
-  templateUrl: './clients-page.component.html',
-  styles: /*css*/`
+    imports: [CommonModule, RouterLink],
+    templateUrl: './clients-page.component.html',
+    styles: /*css*/ `
   #table-container {
     container-type: size;
   }
-  `,
+  `
 })
 export class ClientsPageComponent implements OnInit {
   private dataService = inject(DataService);

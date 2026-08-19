@@ -9,14 +9,13 @@ import { CrearMantenimientoDto } from '../../data/dtos/CrearMantenimiento.dto';
 import { AuthService } from '../../auth/auth.service';
 
 @Component({
-  standalone: true,
-  imports: [LoaderComponent, ReactiveFormsModule, CommonModule],
-  templateUrl: './mantenimiento-formulario-page.component.html',
-  styles: `    
+    imports: [LoaderComponent, ReactiveFormsModule, CommonModule],
+    templateUrl: './mantenimiento-formulario-page.component.html',
+    styles: `    
   #table-container {
     container-type: size;
   }
-  `,
+  `
 })
 export class MantenimientoFormularioPageComponent {
   private activatedRoute = inject(ActivatedRoute);

@@ -11,10 +11,9 @@ import { CustomTimePipe } from '../../pipes/customTime.pipe';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  standalone: true,
-  imports: [LoaderComponent, CommonModule, CustomTimePipe, RouterLink],
-  templateUrl: './mantenimiento-detalle.component.html',
-  styles: ``
+    imports: [LoaderComponent, CommonModule, CustomTimePipe, RouterLink],
+    templateUrl: './mantenimiento-detalle.component.html',
+    styles: ``
 })
 export class MantenimientoDetalleComponent {
   private dataService = inject(DataService);

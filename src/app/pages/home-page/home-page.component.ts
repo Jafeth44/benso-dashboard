@@ -4,11 +4,10 @@ import { DataService } from '../../data/data.service';
 import { AuthService } from '../../auth/auth.service';
 
 @Component({
-  selector: 'app-home-page',
-  standalone: true,
-  imports: [RouterLink],
-  templateUrl: './home-page.component.html',
-  styles: ''
+    selector: 'app-home-page',
+    imports: [RouterLink],
+    templateUrl: './home-page.component.html',
+    styles: ''
 })
 export class HomePageComponent {
 }

@@ -3,10 +3,9 @@ import { DataService } from '../../data/data.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  standalone: true,
-  imports: [],
-  templateUrl: './subir-equipos.component.html',
-  styles: ``
+    imports: [],
+    templateUrl: './subir-equipos.component.html',
+    styles: ``
 })
 export class SubirEquiposComponent {
   private dataService = inject(DataService);

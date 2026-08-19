@@ -13,13 +13,12 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @Component({
-  standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, CommonModule, LoaderComponent, AutocompleteComponent, MatAutocompleteModule],
-  templateUrl: './nuevo-equipo-page.component.html',
-  styles: `
+    imports: [ReactiveFormsModule, RouterLink, CommonModule, LoaderComponent, AutocompleteComponent, MatAutocompleteModule],
+    templateUrl: './nuevo-equipo-page.component.html',
+    styles: `
       #table-container {
       container-type: size;
-    }`,
+    }`
 })
 export class NuevoEquipoPageComponent implements OnInit {
   private formBuilder = inject(FormBuilder);
