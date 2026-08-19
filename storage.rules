@@ -1,12 +1,14 @@
 rules_version = '2';
 
-// Craft rules based on data in your Firestore database
-// allow write: if firestore.get(
-//    /databases/(default)/documents/users/$(request.auth.uid)).data.isAdmin;
+// Photo uploads (equipo-detalle-page) aren't admin-gated in the app --
+// any authenticated user can update an equipo's photo, matching the
+// equivalent foto/fotoRef allowance in firestore.rules. So storage
+// access mirrors Firestore's "any authenticated user" read/write,
+// rather than being admin-only.
 service firebase.storage {
   match /b/{bucket}/o {
     match /{allPaths=**} {
-      allow read, write: if false;
+      allow read, write: if request.auth != null;
     }
   }
 }

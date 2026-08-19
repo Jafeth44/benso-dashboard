@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { DashboardLayoutComponent } from './layout/dashboard-layout/dashboard-layout.component';
 import { authGuard } from './guards/auth.guard';
 import { publicGuard } from './guards/public.guard';
+import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
   {
@@ -13,11 +14,6 @@ export const routes: Routes = [
         path: '',
         loadComponent: () => import('./pages/home-page/home-page.component').then(c => c.HomePageComponent),
       },
-      //temporal
-      {
-        path: 'subir',
-        loadComponent: () => import('./pages/subir-equipos/subir-equipos.component').then(c => c.SubirEquiposComponent),
-      },
       {
         path: 'clients',
         loadComponent: () => import('./pages/clients-page/clients-page.component').then(c => c.ClientsPageComponent),
@@ -28,6 +24,7 @@ export const routes: Routes = [
       },
       {
         path: 'equipos/nuevo',
+        canActivate: [adminGuard],
         loadComponent: () => import('./pages/nuevo-equipo-page/nuevo-equipo-page.component').then(c => c.NuevoEquipoPageComponent)
       },
       {
@@ -36,6 +33,7 @@ export const routes: Routes = [
       },
       {
         path: 'equipos/:id/editar',
+        canActivate: [adminGuard],
         loadComponent: () => import('./pages/editar-equipo-page/editar-equipo-page.component').then(c => c.EditarEquipoPageComponent)
       },
       {
