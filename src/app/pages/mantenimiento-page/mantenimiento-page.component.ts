@@ -6,8 +6,6 @@ import { GetEquiposDto } from '../../data/dtos/GetEquipos.dto';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { AgendarMantenimientoComponent } from '../../components/agendar-mantenimieto/agendar-mantenimieto.component';
-import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
-import { ToastrService } from 'ngx-toastr';
 import { sortByProperty } from 'sort-by-property';
 
 @Component({

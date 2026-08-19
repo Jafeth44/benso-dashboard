@@ -3,9 +3,9 @@
     <h3 class="font-bold text-lg">Activo {{activo}}</h3>
     <div class="form-control">
       <div class="label">
-        <label class="label-text">Agendar Mantenimiento</label>
+        <label for="fecha-mantenimiento" class="label-text">Agendar Mantenimiento</label>
       </div>
-      <input type="date" class="input input-bordered" (change)="fecha.set(txtFecha.value);invalid = false" #txtFecha>
+      <input id="fecha-mantenimiento" type="date" class="input input-bordered" (change)="fecha.set(txtFecha.value);invalid = false" #txtFecha>
     </div>
     <div class="modal-action">
       <form method="dialog">

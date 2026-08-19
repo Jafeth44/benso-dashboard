@@ -25,7 +25,7 @@
           <th class="hidden md:table-cell">Teléfono</th>
         </tr>
         @for(item of equipos; track $index) {
-          @if(item.cliente == cliente) {
+          @if(item.cliente === cliente) {
             <tbody class="overflow-y-auto">
               <tr [routerLink]="'/dashboard/equipos/'+item.activo.toString()"  [classList]="$odd ? 'bg-base-100 cursor-pointer hover:bg-base-content hover:bg-opacity-30 hover:transition-all' : 'bg-base-200 cursor-pointer hover:bg-base-content hover:bg-opacity-30 hover:transition-all'" >
                 <td><div class="badge badge-accent">{{ item.activo }}</div></td>
@@ -41,7 +41,7 @@
         }
       }
     </table>
-      @if(equipos.length == 0) {
+      @if(equipos.length === 0) {
         <div class="card-title flex-1 self-center justify-self-center">La búsqueda {{searchQuery()}} no dió resultados</div>
       }
     }

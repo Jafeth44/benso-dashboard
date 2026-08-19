@@ -7,8 +7,7 @@ import { CrearEquipoConLocalDto } from '../../data/dtos/CreateEquipoConLocal.dto
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { ToastrService } from 'ngx-toastr';
 import { AutocompleteComponent } from '../../components/autocomplete/autocomplete.component';
-import { Observable, combineLatest, map, tap } from 'rxjs';
-import { GetEquiposDto } from '../../data/dtos/GetEquipos.dto';
+import { Observable, combineLatest, map } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
@@ -29,7 +28,7 @@ export class NuevoEquipoPageComponent implements OnInit {
   public esAdmin$ = this.dataService.isAdmin$;
   public equipos$ = this.dataService.equipos$;
   public clientes!: Observable<string[]>;
-  public isLoading: boolean = false;
+  public isLoading = false;
 
   public items$!: Observable<string[]>;
   public input = signal('');
@@ -41,7 +40,7 @@ export class NuevoEquipoPageComponent implements OnInit {
     serie: [''],
     cliente: [''],
     nombreLocal: [''],
-    telefono: ['', Validators.pattern(/^\d{8}$|^\d{4}\s\d{4}$|^\d{4}\-\d{4}$/)],
+    telefono: ['', Validators.pattern(/^\d{8}$|^\d{4}\s\d{4}$|^\d{4}-\d{4}$/)],
     direccion: [''],
     encargado: [''],
     fechaDeEntrega: [''],
@@ -104,7 +103,7 @@ export class NuevoEquipoPageComponent implements OnInit {
       this.isLoading = false;
       this.toastr.success('Se ha creado correctamente','Guardado');
       this.router.navigateByUrl('/dashboard/equipos');
-    } catch (error) {
+    } catch {
       this.isLoading = false;
       this.toastr.error('Se ha producido un error inesperado');
       return;

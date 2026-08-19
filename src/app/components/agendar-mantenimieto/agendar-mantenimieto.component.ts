@@ -15,7 +15,7 @@ export class AgendarMantenimientoComponent {
   @Input({required: true})
   public activo!: string;
 
-  public isLoading: boolean = false;
+  public isLoading = false;
   public fecha = signal('');
   public invalid = true;
 

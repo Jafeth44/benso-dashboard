@@ -13,6 +13,6 @@ import { AgendarMantenimientoComponent } from '../../components/agendar-mantenim
 export class StatsPageComponent {
   public chartData: number[] = [100, 70, 30];
   public chartColors: Color[] = ['#005e1f', '#6e000f', '#817400'];
-  public chartTitle: string = 'Actividad de Equipos';
+  public chartTitle = 'Actividad de Equipos';
   public chartLabels: string[] = ['Activos', 'Inactivos', 'Mantenimiento'];
 }

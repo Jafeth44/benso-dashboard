@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { combineLatest, debounceTime, map, Observable } from 'rxjs';
 import { DataService } from '../../data/data.service';
 import { GetEquiposDto } from '../../data/dtos/GetEquipos.dto';

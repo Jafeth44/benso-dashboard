@@ -1,9 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { Firestore, docData, updateDoc } from '@angular/fire/firestore';
-import { Observable, map, take } from 'rxjs';
+import { Observable } from 'rxjs';
 import { doc } from 'firebase/firestore';
 
 import { sortByProperty } from 'sort-by-property';

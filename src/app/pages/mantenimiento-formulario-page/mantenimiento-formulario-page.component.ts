@@ -24,7 +24,7 @@ export class MantenimientoFormularioPageComponent {
   private dataService = inject(DataService);
   private toastr = inject(ToastrService);
   public user$ = this.authService.authState$;
-  public isLoading: boolean = false;
+  public isLoading = false;
   public location = inject(Location);
 
   public nuevoMantenimientoForm: FormGroup = this.formBuilder.group({

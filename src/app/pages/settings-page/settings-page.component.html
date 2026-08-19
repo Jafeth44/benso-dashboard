@@ -100,22 +100,22 @@
                 </div>
                 <div class="form-control">
                   <div class="label">
-                    <label for="label-text">
+                    <label for="displayName" class="label-text">
                       Nombre
                     </label>
                   </div>
-                  <input type="text" class="input input-bordered" placeholder="Nombre Completo" formControlName="displayName">
+                  <input id="displayName" type="text" class="input input-bordered" placeholder="Nombre Completo" formControlName="displayName">
                 </div>
                 <div class="form-control">
                   <div class="label">
-                    <label class="label-text">
+                    <label for="password" class="label-text">
                       Contraseña
                     </label>
-                    <label class="label-text-alt">
+                    <span class="label-text-alt">
                       Tiene que tener más de 6 caracteres
-                    </label>
+                    </span>
                   </div>
-                  <input type="password" class="input input-bordered" placeholder="Contraseña" formControlName="password">
+                  <input id="password" type="password" class="input input-bordered" placeholder="Contraseña" formControlName="password">
                 </div>
                 <div class="flex justify-center gap-2 mt-2">
                   <button type="submit" class="btn btn-success">Guardar</button>

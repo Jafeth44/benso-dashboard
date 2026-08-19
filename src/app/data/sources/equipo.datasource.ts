@@ -15,6 +15,7 @@ export class EquiposDataSource extends DataSource<GetEquiposDto> {
     return this._dataStream;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function -- required by DataSource, nothing to tear down
   public disconnect() {}
 
   public setData(data: GetEquiposDto[]) {

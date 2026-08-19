@@ -6,7 +6,7 @@ import { DataService } from '../../data/data.service';
 import { CrearEquipoConLocalDto } from '../../data/dtos/CreateEquipoConLocal.dto';
 import { ToastrService } from 'ngx-toastr';
 import { AutocompleteComponent } from '../../components/autocomplete/autocomplete.component';
-import { Observable, combineLatest, map, tap } from 'rxjs';
+import { Observable, combineLatest, map } from 'rxjs';
 import { GetEquiposDto } from '../../data/dtos/GetEquipos.dto';
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -31,8 +31,8 @@ export class EditarEquipoPageComponent implements OnInit {
   public esAdmin$ = this.dataService.isAdmin$;
   public equipos$: Observable<GetEquiposDto[]> = this.dataService.equipos$;
   public clientes!: Observable<string[]>;
-  public isLoading: boolean = false;
-  public isFormInvalid: boolean = false;
+  public isLoading = false;
+  public isFormInvalid = false;
   public route = this.activatedRoute.snapshot.params['id'];
   public nuevoEquipoForm!: FormGroup;
   public items$!: Observable<string[]>;
@@ -62,7 +62,7 @@ export class EditarEquipoPageComponent implements OnInit {
             serie: [equipo!.serie],
             cliente: [equipo!.cliente],
             nombreLocal: [equipo!.nombreLocal],
-            telefono: [equipo!.telefono, Validators.pattern(/^\d{8}$|^\d{4}\s\d{4}$|^\d{4}\-\d{4}$/)],
+            telefono: [equipo!.telefono, Validators.pattern(/^\d{8}$|^\d{4}\s\d{4}$|^\d{4}-\d{4}$/)],
             direccion: [equipo!.direccion],
             encargado: [equipo!.encargado],
             fechaDeEntrega: [equipo!.fechaDeEntrega],
