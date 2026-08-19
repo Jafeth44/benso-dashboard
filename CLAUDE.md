@@ -42,9 +42,14 @@ export const environment = {
 - Run it alongside `bun run start`. Firestore/Storage rules are loaded from the local `firestore.rules`/`storage.rules` files, so rule changes can be tested here before touching production.
 - To point the app at production instead, set `useEmulators: false` in `environment.development.ts`.
 
-## Firestore security
+## Firestore/Storage security model
 
-`firestore.rules` currently grants any authenticated user full read/write access to all documents. Be cautious when touching auth or Firestore rules — don't assume per-user scoping exists unless you check.
+Role-based, not per-user (equipos are shared company data, no ownership field exists). `isAdmin` is looked up via the `administradores` collection, whose **document ID must be the admin's exact sign-in email** (e.g. `nombre@equiposbenso.com`) — rules can only `get()`/`exists()` a known path, not query by field, so this is managed manually in the Firebase console, not by app code.
+
+- `equipos`: any authenticated user can read; only admins can `create`/`delete`; `update` is admin-only *except* the `mantenimientos`, `proximoMantenimiento`, `foto`, and `fotoRef` fields, which any authenticated user may update (matches the UI: maintenance logging and photo updates aren't admin-gated, but equipo create/edit is).
+- `storage`: any authenticated user can read/write — mirrors the `foto`/`fotoRef` allowance above, since photo uploads aren't admin-gated either.
+- `src/app/guards/admin.guard.ts` mirrors this client-side (reuses `DataService.isAdmin$`) as defense-in-depth on the `equipos/nuevo` and `equipos/:id/editar` routes — the rules are the actual enforcement.
+- Test rule changes against the local emulator (see above) before touching production; the emulator loads `firestore.rules`/`storage.rules` directly.
 
 ## Workflow
 
