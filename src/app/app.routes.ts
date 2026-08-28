@@ -78,6 +78,10 @@ export const routes: Routes = [
     ]
   },
   {
+    path: 'error-conexion',
+    loadComponent: () => import('./pages/error-conexion-page/error-conexion-page.component').then(c => c.ErrorConexionPageComponent),
+  },
+  {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full'
